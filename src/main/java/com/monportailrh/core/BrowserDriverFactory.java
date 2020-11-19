@@ -28,6 +28,7 @@ public class BrowserDriverFactory {
         return driver.get();
     }
 
+    // Move these paths to config
     private void getConfiguredBrowserForMac(String browser) {
         switch (browser) {
             case "chrome":

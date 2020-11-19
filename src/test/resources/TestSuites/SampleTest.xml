@@ -1,19 +1,27 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="This is a Test Suite Sample" verbose="1">
+<suite name="Sample Test Suite" verbose="1">
     <!--<parameter name="generalPropertiesFilePath" value="config/general/qa.properties"/>-->
     <listeners>
         <listener class-name="com.monportailrh.core.TestListener"/>
     </listeners>
 
-    <test name="Sample Test">
+    <test name="First Sample Test">
         <classes>
-            <class name="com.monportailrh.Fst">
+            <class name="com.monportailrh.FirstTestClass">
+                <methods>
+                    <include name="FirstTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!--<test name="Second Sample Test">
+        <classes>
+            <class name="com.monportailrh.SecondTestClass">
                 <methods>
                     <include name="sssss"/>
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 </suite>

@@ -1,0 +1,48 @@
+package com.monportailrh.loginTest;
+
+import com.monportailrh.core.BaseTest;
+import com.monportailrh.core.TestListener;
+import com.monportailrh.model.Users;
+import com.monportailrh.object.Header;
+import com.monportailrh.object.LoginPage;
+import com.monportailrh.utility.GeneralPropertyManger;
+import com.monportailrh.utility.User;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+@Listeners({TestListener.class})
+public class PositiveLoginTest extends BaseTest {
+    @DataProvider(name = "defaultUsers")
+    public Iterator<Object[]> createData() {
+        List<Object[]> usersList = new ArrayList<>();
+        usersList.add(new Object[]{Users.SUPERADMIN});
+        usersList.add(new Object[]{Users.ANGELINA_JOLIE});
+        return usersList.iterator();
+    }
+
+
+    @Test(dataProvider = "defaultUsers")
+    public void logInAsAdminTest(User user) {
+        log.info("Starting positive login test with admin credentials");
+        LoginPage loginPage = new LoginPage(driver, log);
+
+        // Opening SSO LogIn page
+        loginPage.openLoginPage(GeneralPropertyManger.BASE_URL);
+
+        // Providing Username and Password
+        loginPage.fillInUserName(user.getUsername());
+        loginPage.fillInPassword(user.getPassword());
+
+        // Clicking on LogIn button
+        Header header = loginPage.clickLoginButton();
+
+        // Asserting that Header logo is visible
+        Assert.assertTrue(header.isLogoVisible());
+    }
+}

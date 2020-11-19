@@ -7,15 +7,14 @@ import java.util.Properties;
 
 public class GeneralPropertyManger {
     private static Properties PROP_FILE;
-    public static String SSO_ENDPOINT;
     public static String SSO_ENDPOINT_API;
     public static String BASE_URL;
     public static String BASE_URL_API;
     public static String CLIENT_ID;
     public static String SUPERADMIN_USERNAME;
     public static String SUPERADMIN_PASSWORD;
-    public static String JOLIE_USERNAME;
-    public static String JOLIE_PASSWORD;
+    public static String ANGELINA_JOLIE_USERNAME;
+    public static String ANGELINA_JOLIE_PASSWORD;
 
     public static void setProperties(String filePath) {
         retrieveProperties(filePath);
@@ -27,15 +26,14 @@ public class GeneralPropertyManger {
     }
 
     private static void readProperties() {
-        SSO_ENDPOINT = PROP_FILE.getProperty("SSO_ENDPOINT");
         SSO_ENDPOINT_API = PROP_FILE.getProperty("SSO_ENDPOINT_API");
         BASE_URL = PROP_FILE.getProperty("BASE_URL");
         BASE_URL_API = PROP_FILE.getProperty("BASE_URL_API");
         CLIENT_ID = PROP_FILE.getProperty("CLIENT_ID");
         SUPERADMIN_USERNAME = PROP_FILE.getProperty("SUPERADMIN_USERNAME");
         SUPERADMIN_PASSWORD = PROP_FILE.getProperty("SUPERADMIN_PASSWORD");
-        JOLIE_USERNAME = PROP_FILE.getProperty("JOLIE_USERNAME");
-        JOLIE_PASSWORD = PROP_FILE.getProperty("JOLIE_PASSWORD");
+        ANGELINA_JOLIE_USERNAME = PROP_FILE.getProperty("ANGELINA_JOLIE_USERNAME");
+        ANGELINA_JOLIE_PASSWORD = PROP_FILE.getProperty("ANGELINA_JOLIE_PASSWORD");
     }
 
     public static Properties getProperties(String path) {
