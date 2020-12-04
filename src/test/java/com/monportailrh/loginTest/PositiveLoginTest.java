@@ -1,12 +1,12 @@
+/*
 package com.monportailrh.loginTest;
 
 import com.monportailrh.core.BaseTest;
 import com.monportailrh.core.TestListener;
-import com.monportailrh.model.Users;
 import com.monportailrh.object.Header;
 import com.monportailrh.object.LoginPage;
 import com.monportailrh.utility.GeneralPropertyManger;
-import com.monportailrh.utility.User;
+import com.monportailrh.utility.model.User;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -25,7 +25,6 @@ public class PositiveLoginTest extends BaseTest {
         usersList.add(new Object[]{Users.ANGELINA_JOLIE});
         return usersList.iterator();
     }
-
 
     @Test(dataProvider = "defaultUsers")
     public void logInAsAdminTest(User user) {
@@ -46,3 +45,4 @@ public class PositiveLoginTest extends BaseTest {
         Assert.assertTrue(header.isLogoVisible());
     }
 }
+*/

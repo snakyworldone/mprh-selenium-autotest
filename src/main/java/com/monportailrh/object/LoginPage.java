@@ -1,6 +1,5 @@
 package com.monportailrh.object;
 
-import com.monportailrh.model.Users;
 import com.monportailrh.utility.GeneralPropertyManger;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -46,11 +45,11 @@ public class LoginPage extends BasePageObject {
         return new Header(driver, log);
     }
 
-    public void loginAsAdmin() {
+    /*public void loginAsAdmin() {
         openLoginPage(GeneralPropertyManger.BASE_URL);
         fillInUserName(Users.SUPERADMIN.getUsername());
         fillInPassword(Users.SUPERADMIN.getPassword());
         clickLoginButton();
-    }
+    }*/
 
 }
