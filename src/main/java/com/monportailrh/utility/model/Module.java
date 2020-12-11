@@ -11,5 +11,4 @@ public class Module {
     private int id;
     private String name;
     private String webUrl;
-
 }

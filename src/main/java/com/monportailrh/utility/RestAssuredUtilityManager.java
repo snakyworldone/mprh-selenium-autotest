@@ -1,6 +1,5 @@
-package com.monportailrh.utility.RestAssuredUtil;
+package com.monportailrh.utility;
 
-import com.monportailrh.utility.GeneralPropertyManger;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.Module;
 import io.restassured.builder.RequestSpecBuilder;
@@ -15,14 +14,17 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class Authorization {
+public class RestAssuredUtilityManager {
     private static String SSO_ENDPOINT_API = GeneralPropertyManger.SSO_ENDPOINT_API;
     private static String CLIENT_ID = GeneralPropertyManger.CLIENT_ID;
     private RequestSpecification fieldsRequestSpecification;
     private ResponseSpecification fieldResponseSpecification;
 
-
-    public Authorization(Credential userCredentials) {
+    /**
+     * Constructor that sets default request/response specification
+     * @param userCredentials represents User credentials, used to set up actual User
+     */
+    public RestAssuredUtilityManager(Credential userCredentials) {
         fieldsRequestSpecification = new RequestSpecBuilder()
                 .addHeader("Authorization", "Bearer " + getBearerToken(userCredentials))
                 .addHeader("Accept-Language", "en")

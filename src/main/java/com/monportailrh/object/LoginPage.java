@@ -1,6 +1,7 @@
 package com.monportailrh.object;
 
 import com.monportailrh.utility.GeneralPropertyManger;
+import com.monportailrh.utility.model.User;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,17 +40,22 @@ public class LoginPage extends BasePageObject {
         type(password, passwordInput);
     }
 
-    public Header clickLoginButton() {
+    /*public Header clickLoginButton() {
         log.info("Clicking on Login button");
         click(loginButton);
         return new Header(driver, log);
+    }*/
+
+    public void clickLoginButton() {
+        log.info("Clicking on Login button");
+        click(loginButton);
     }
 
-    /*public void loginAsAdmin() {
+    public void fastLogIn(User testUser) {
         openLoginPage(GeneralPropertyManger.BASE_URL);
-        fillInUserName(Users.SUPERADMIN.getUsername());
-        fillInPassword(Users.SUPERADMIN.getPassword());
+        fillInUserName(testUser.getUsername());
+        fillInPassword(testUser.getPassword());
         clickLoginButton();
-    }*/
+    }
 
 }

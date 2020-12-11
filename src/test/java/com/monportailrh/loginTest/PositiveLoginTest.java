@@ -1,4 +1,4 @@
-/*
+
 package com.monportailrh.loginTest;
 
 import com.monportailrh.core.BaseTest;
@@ -6,6 +6,7 @@ import com.monportailrh.core.TestListener;
 import com.monportailrh.object.Header;
 import com.monportailrh.object.LoginPage;
 import com.monportailrh.utility.GeneralPropertyManger;
+import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.User;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -21,8 +22,8 @@ public class PositiveLoginTest extends BaseTest {
     @DataProvider(name = "defaultUsers")
     public Iterator<Object[]> createData() {
         List<Object[]> usersList = new ArrayList<>();
-        usersList.add(new Object[]{Users.SUPERADMIN});
-        usersList.add(new Object[]{Users.ANGELINA_JOLIE});
+        usersList.add(new Object[]{new User(Credential.SUPERADMIN)});
+        usersList.add(new Object[]{new User(Credential.ANGELINA_JOLIE)});
         return usersList.iterator();
     }
 
@@ -39,10 +40,11 @@ public class PositiveLoginTest extends BaseTest {
         loginPage.fillInPassword(user.getPassword());
 
         // Clicking on LogIn button
-        Header header = loginPage.clickLoginButton();
+        loginPage.clickLoginButton();
+        Header header = new Header(driver, log);
 
         // Asserting that Header logo is visible
         Assert.assertTrue(header.isLogoVisible());
     }
 }
-*/
+

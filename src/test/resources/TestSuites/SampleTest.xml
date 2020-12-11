@@ -10,7 +10,7 @@
         <classes>
             <class name="com.monportailrh.FirstTestClass">
                 <methods>
-                    <include name="FirstTest"/>
+                    <include name="MyModuleWidgetIsVisible"/>
                 </methods>
             </class>
         </classes>
