@@ -26,6 +26,7 @@ public class User {
     public List<String> listAllModuleNames() {
         List<String> listOfModuleNames = new ArrayList<>();
         for (Module module : listOfModules) {
+            //if access=true
             listOfModuleNames.add(module.getName());
         }
         return listOfModuleNames;

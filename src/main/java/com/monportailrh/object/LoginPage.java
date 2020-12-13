@@ -1,14 +1,14 @@
 package com.monportailrh.object;
 
-import com.monportailrh.utility.GeneralPropertyManger;
 import com.monportailrh.utility.model.User;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class LoginPage extends BasePageObject {
-    //@FindBy(xpath = "//*[@id=\"username\"]")
+
     @FindBy(id = "username")
     private WebElement userNameInput;
     @FindBy(id = "password")
@@ -40,22 +40,20 @@ public class LoginPage extends BasePageObject {
         type(password, passwordInput);
     }
 
-    /*public Header clickLoginButton() {
-        log.info("Clicking on Login button");
-        click(loginButton);
-        return new Header(driver, log);
-    }*/
-
     public void clickLoginButton() {
         log.info("Clicking on Login button");
         click(loginButton);
     }
 
-    public void fastLogIn(User testUser) {
-        openLoginPage(GeneralPropertyManger.BASE_URL);
+    public void validateLogin(User testUser) {
+        Header header = new Header(driver, log);
+        openLoginPage(BASE_URL);
         fillInUserName(testUser.getUsername());
         fillInPassword(testUser.getPassword());
         clickLoginButton();
+        log.info("Validating whether User logged in or not");
+        Assert.assertTrue(header.isLogoVisible());
+        log.info("User was successfully logged in");
     }
 
 }

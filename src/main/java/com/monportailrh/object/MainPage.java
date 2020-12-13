@@ -15,13 +15,13 @@ public class MainPage extends BasePageObject {
         super(driver, log);
     }
 
-    public boolean isMyWidgetVisible() {
+    /*public boolean isMyWidgetVisible() {
         myModulesWidget = new MyModuleWidget(driver, log);
         waitForVisibilityOf(myModulesWidget.title, 5);
         return myModulesWidget.title.isDisplayed();
-    }
+    }*/
 
-    public List<String> listAllModuleNames() {
+    /*public List<String> listAllModuleNames() {
         List<String> myModules = new ArrayList<>();
         myModulesWidget = new MyModuleWidget(driver, log);
         System.out.println("List size " + myModulesWidget.listOfModules.size());
@@ -30,5 +30,5 @@ public class MainPage extends BasePageObject {
             //System.out.println(element.getAttribute("innerText"));
         }
         return myModules;
-    }
+    }*/
 }

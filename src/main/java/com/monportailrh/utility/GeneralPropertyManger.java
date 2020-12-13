@@ -15,6 +15,12 @@ public class GeneralPropertyManger {
     public static String SUPERADMIN_PASSWORD;
     public static String ANGELINA_JOLIE_USERNAME;
     public static String ANGELINA_JOLIE_PASSWORD;
+    public static String BRAD_PITT_USERNAME;
+    public static String BRAD_PITT_PASSWORD;
+    public static String DOLPH_LUNDGREN_USERNAME;
+    public static String DOLPH_LUNDGREN_PASSWORD;
+    public static String JESSICA_ALBA_USERNAME;
+    public static String JESSICA_ALBA_PASSWORD;
 
     public static void setProperties(String filePath) {
         retrieveProperties(filePath);
@@ -34,6 +40,12 @@ public class GeneralPropertyManger {
         SUPERADMIN_PASSWORD = PROP_FILE.getProperty("SUPERADMIN_PASSWORD");
         ANGELINA_JOLIE_USERNAME = PROP_FILE.getProperty("ANGELINA_JOLIE_USERNAME");
         ANGELINA_JOLIE_PASSWORD = PROP_FILE.getProperty("ANGELINA_JOLIE_PASSWORD");
+        BRAD_PITT_USERNAME = PROP_FILE.getProperty("BRAD_PITT_USERNAME");
+        BRAD_PITT_PASSWORD = PROP_FILE.getProperty("BRAD_PITT_PASSWORD");
+        DOLPH_LUNDGREN_USERNAME = PROP_FILE.getProperty("DOLPH_LUNDGREN_USERNAME");
+        DOLPH_LUNDGREN_PASSWORD = PROP_FILE.getProperty("DOLPH_LUNDGREN_PASSWORD");
+        JESSICA_ALBA_USERNAME = PROP_FILE.getProperty("JESSICA_ALBA_USERNAME");
+        JESSICA_ALBA_PASSWORD = PROP_FILE.getProperty("JESSICA_ALBA_PASSWORD");
     }
 
     public static Properties getProperties(String path) {

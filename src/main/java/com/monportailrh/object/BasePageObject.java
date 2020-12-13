@@ -1,5 +1,6 @@
 package com.monportailrh.object;
 
+import com.monportailrh.utility.GeneralPropertyManger;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePageObject {
+    protected final static String BASE_URL = GeneralPropertyManger.BASE_URL;
     protected WebDriver driver;
     protected Logger log;
 

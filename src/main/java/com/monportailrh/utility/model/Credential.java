@@ -18,6 +18,22 @@ public class Credential {
             .setPassword(GeneralPropertyManger.ANGELINA_JOLIE_PASSWORD)
             .build();
 
+    public static final Credential BRAD_PITT = Credential.newBuilder()
+            .setUsername(GeneralPropertyManger.BRAD_PITT_USERNAME)
+            .setPassword(GeneralPropertyManger.BRAD_PITT_PASSWORD)
+            .build();
+
+    public static final Credential DOLPH_LUNDGREN = Credential.newBuilder()
+            .setUsername(GeneralPropertyManger.DOLPH_LUNDGREN_USERNAME)
+            .setPassword(GeneralPropertyManger.DOLPH_LUNDGREN_PASSWORD)
+            .build();
+
+    public static final Credential JESSICA_ALBA = Credential.newBuilder()
+            .setUsername(GeneralPropertyManger.JESSICA_ALBA_USERNAME)
+            .setPassword(GeneralPropertyManger.JESSICA_ALBA_PASSWORD)
+            .build();
+
+
     private Credential() {
     }
 
