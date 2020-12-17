@@ -19,6 +19,7 @@ import java.util.List;
 @Listeners({TestListener.class})
 public class MyModuleWidgetTest extends BaseTest {
     private LoginPage loginPage;
+    private MyModuleWidget myModuleWidget;
 
     @DataProvider(name = "nonAdminTestUsers")
     public Iterator<Object[]> nonAdminTestUsers() {
@@ -37,26 +38,24 @@ public class MyModuleWidgetTest extends BaseTest {
         return usersList.iterator();
     }
 
-    // Test that checks visibility of a widget block
-    // Test that checks visibility of a widget block for Admin
     // Test that checks links
 
-    @Test(dataProvider = "adminTestUsers")
-    public void checkVisibilityOfMyModulesWidgetForAdmin(User testUser) {
-        log.info("Starting Test with Scenario: Check whether Superadmin User has access to My Modules widget");
+    @Test(dataProvider = "nonAdminTestUsers")
+    public void checkVisibilityOfMyModulesWidgetForNonAdmin(User testUser) {
+        log.info("Starting Test with Scenario: Check whether non Superadmin User has access to My Modules widget");
 
         // Logging In and Verifying Login
         loginPage = new LoginPage(driver, log);
         loginPage.validateLogin(testUser);
 
         // Assert that My modules widget visible
-        MyModuleWidget myModuleWidget = new MyModuleWidget(driver, log);
-        Assert.assertFalse(myModuleWidget.isMyWidgetVisible());
-        log.info("[My Modules] widget is not visible");
+        myModuleWidget = new MyModuleWidget(driver, log);
+        Assert.assertTrue(myModuleWidget.validateMyModulesWidgetIsVisible());
+        log.info("[My Modules] widget is visible");
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
-    public void checkModuleVisibilityByPermissionsForNonAdmins(User testUser) {
+    public void checkModuleVisibilityForNonAdmins(User testUser) {
         Utility utility = new Utility();
         log.info("Starting Test with Scenario: Check Modules visibility based on permissions");
 
@@ -65,12 +64,12 @@ public class MyModuleWidgetTest extends BaseTest {
         loginPage.validateLogin(testUser);
 
         // Assert that My modules widget visible
-        MyModuleWidget myModuleWidget = new MyModuleWidget(driver, log);
-        Assert.assertTrue(myModuleWidget.isMyWidgetVisible());
+        myModuleWidget = new MyModuleWidget(driver, log);
+        Assert.assertTrue(myModuleWidget.validateMyModulesWidgetIsVisible());
         log.info("[My Modules] widget is visible");
 
         List<String> expectedArrayOfModules = testUser.listAllModuleNames();
-        List<String> actualArrayOfModules = myModuleWidget.listAllModuleNames();
+        List<String> actualArrayOfModules = myModuleWidget.getAllModuleNames();
 
         log.info("Actual array is: " + utility.listAllElements(actualArrayOfModules));
         log.info("Expected array is: " + utility.listAllElements(expectedArrayOfModules));

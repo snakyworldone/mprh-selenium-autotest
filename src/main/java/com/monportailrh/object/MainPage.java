@@ -11,6 +11,7 @@ import java.util.List;
 public class MainPage extends BasePageObject {
     private MyModuleWidget myModulesWidget;
 
+
     public MainPage(WebDriver driver, Logger log) {
         super(driver, log);
     }

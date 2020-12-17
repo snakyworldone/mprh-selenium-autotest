@@ -7,6 +7,7 @@ import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.MyModuleWidget;
 import com.monportailrh.utility.model.User;
 import com.monportailrh.utility.model.Utility;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -22,17 +23,17 @@ public class SampleTest extends BaseTest {
     @DataProvider(name = "defaultUsers")
     public Iterator<Object[]> createData() {
         List<Object[]> usersList = new ArrayList<>();
-        usersList.add(new Object[]{new User(Credential.ANGELINA_JOLIE)});
+        usersList.add(new Object[]{new User(Credential.ANGELINA_JOLIE)});/*
         usersList.add(new Object[]{new User(Credential.BRAD_PITT)});
         usersList.add(new Object[]{new User(Credential.DOLPH_LUNDGREN)});
-        usersList.add(new Object[]{new User(Credential.JESSICA_ALBA)});
+        usersList.add(new Object[]{new User(Credential.JESSICA_ALBA)});*/
         return usersList.iterator();
     }
 
     @Test(dataProvider = "defaultUsers")
-    public void MyModuleWidgetIsVisible(User testUser) {
+    public void sampleTest(User testUser) throws InterruptedException {
         Utility utility = new Utility();
-        log.info("Starting positive login test with admin credentials");
+        log.info("Starting Test to check module links");
 
         // Logging In and Verifying Login
         LoginPage loginPage = new LoginPage(driver, log);
@@ -40,15 +41,33 @@ public class SampleTest extends BaseTest {
 
         // Assert that My modules widget visible
         MyModuleWidget myModuleWidget = new MyModuleWidget(driver, log);
-        Assert.assertTrue(myModuleWidget.isMyWidgetVisible());
-        log.info("[My Modules] widget is visible");
+        myModuleWidget.validateMyModulesWidgetIsVisible();
 
         List<String> expectedArrayOfModules = testUser.listAllModuleNames();
-        List<String> actualArrayOfModules = myModuleWidget.listAllModuleNames();
+        List<String> actualArrayOfModules = myModuleWidget.getAllModuleNames();
 
         log.info("Actual array is: " + utility.listAllElements(actualArrayOfModules));
         log.info("Expected array is: " + utility.listAllElements(expectedArrayOfModules));
 
+        // Assert Expected and Actual module arrays are equal
         Assert.assertEquals(actualArrayOfModules, expectedArrayOfModules, "Actual and Expected arrays are different");
+        log.info("Actual and Expected Module arrays are equal");
+
+        String parentWindowHandle = driver.getWindowHandle();
+
+        for (WebElement element : myModuleWidget.getListOfModules()) {
+            log.info("Clicking on [" + element.getAttribute("innerText") + "] module");
+            element.click();
+            ArrayList<String> openedTabs = new ArrayList<>(driver.getWindowHandles());
+            openedTabs.remove(parentWindowHandle);
+            driver.switchTo().window(openedTabs.get(0));
+            Thread.sleep(1000);
+            log.info("Current URL is: " + driver.getCurrentUrl());
+            driver.close();
+            driver.switchTo().window(parentWindowHandle);
+        }
+
+
+        testUser.getListOfModules()
     }
 }

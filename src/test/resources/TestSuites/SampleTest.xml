@@ -10,18 +10,9 @@
         <classes>
             <class name="com.monportailrh.SampleTest">
                 <methods>
-                    <include name="MyModuleWidgetIsVisible"/>
+                    <include name="sampleTest"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <!--<test name="Second Sample Test">
-        <classes>
-            <class name="com.monportailrh.SecondTestClass">
-                <methods>
-                    <include name="sssss"/>
-                </methods>
-            </class>
-        </classes>
-    </test>-->
 </suite>

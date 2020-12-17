@@ -5,21 +5,21 @@
     <listeners>
         <listener class-name="com.monportailrh.core.TestListener"/>
     </listeners>
-    <!--<test name="My Modules Widget Visibility Test">
+    <test name="My Modules Widget Visibility Test">
         <classes>
             <class name="com.monportailrh.myModuleTest.MyModuleWidgetTest">
                 <methods>
-                    <include name="checkVisibilityOfMyModulesWidgetForAdmin"/>
+                    <include name="checkVisibilityOfMyModulesWidgetForNonAdmin"/>
                 </methods>
             </class>
         </classes>
     </test>
--->
+
     <test name="Modules Visibility Test">
         <classes>
             <class name="com.monportailrh.myModuleTest.MyModuleWidgetTest">
                 <methods>
-                    <include name="MyModuleWidgetIsVisible"/>
+                    <include name="checkModuleVisibilityForNonAdmins"/>
                 </methods>
             </class>
         </classes>
