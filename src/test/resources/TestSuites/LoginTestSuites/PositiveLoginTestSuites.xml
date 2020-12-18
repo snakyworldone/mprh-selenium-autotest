@@ -5,7 +5,7 @@
         <listener class-name="com.monportailrh.core.TestListener"/>
     </listeners>
 
-    <test name="Positive Login With Admin Credentials">
+    <test name="Positive Login Test">
         <classes>
             <class name="com.monportailrh.loginTest.PositiveLoginTest">
             </class>

@@ -7,7 +7,6 @@ import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.MyModuleWidget;
 import com.monportailrh.utility.model.User;
 import com.monportailrh.utility.Utility;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -38,6 +37,19 @@ public class MyModuleWidgetTest extends BaseTest {
         return usersList.iterator();
     }
 
+    @Test(dataProvider = "adminTestUsers")
+    public void checkVisibilityOfMyModulesWidgetForAdmin(User testUser) {
+        log.info("Starting Test to check MyModules widget visibility");
+
+        // Logging In and Verifying Login
+        loginPage = new LoginPage(driver, log);
+        loginPage.validateLogin(testUser);
+
+        // Assert that My modules widget visible
+        myModuleWidget = new MyModuleWidget(driver, log);
+        myModuleWidget.validateMyModulesWidgetIsNotVisible();
+    }
+
     @Test(dataProvider = "nonAdminTestUsers")
     public void checkVisibilityOfMyModulesWidgetForNonAdmin(User testUser) {
         log.info("Starting Test to check MyModules widget visibility");
@@ -52,7 +64,7 @@ public class MyModuleWidgetTest extends BaseTest {
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
-    public void checkDisplayedModulesForNonAdmin(User testUser) {
+    public void checkDisplayedModules(User testUser) {
         Utility utility = new Utility();
         log.info("Starting Test to check Displayed modules");
 

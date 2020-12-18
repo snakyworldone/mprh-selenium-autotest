@@ -23,11 +23,14 @@ public class PositiveLoginTest extends BaseTest {
         List<Object[]> usersList = new ArrayList<>();
         usersList.add(new Object[]{new User(Credential.SUPERADMIN)});
         usersList.add(new Object[]{new User(Credential.ANGELINA_JOLIE)});
+        usersList.add(new Object[]{new User(Credential.BRAD_PITT)});
+        usersList.add(new Object[]{new User(Credential.DOLPH_LUNDGREN)});
+        usersList.add(new Object[]{new User(Credential.JESSICA_ALBA)});
         return usersList.iterator();
     }
 
     @Test(dataProvider = "defaultUsers")
-    public void logInAsTest(User user) {
+    public void logInTest(User user) {
         log.info("Starting positive login test with admin credentials");
         LoginPage loginPage = new LoginPage(driver, log);
 

@@ -3,6 +3,8 @@ package com.monportailrh.utility.model;
 import com.monportailrh.object.BasePageObject;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -39,7 +41,7 @@ public class MyModuleWidget extends BasePageObject {
         String expectedUrl;
 
         for (WebElement element : getListOfModules()) {
-            moduleName = element.getAttribute("innerText");
+            moduleName = element.getAttribute("textContent");
             expectedUrl = testUser.getMapOfModules().get(moduleName).getWebUrl();
 
             log.info("Clicking on [" + moduleName + "] module");
@@ -55,10 +57,26 @@ public class MyModuleWidget extends BasePageObject {
         }
     }
 
+    private boolean validateMyModulesWidget() {
+        try {
+            waitForVisibilityOf(getTitle(), 5);
+        } catch (TimeoutException ignored) {
+        }
+        try {
+            return getTitle().isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     public void validateMyModulesWidgetIsVisible() {
-        waitForVisibilityOf(getTitle(), 5);
-        Assert.assertTrue(getTitle().isDisplayed());
+        Assert.assertTrue(validateMyModulesWidget());
         log.info("[My Modules] widget is visible");
+    }
+
+    public void validateMyModulesWidgetIsNotVisible() {
+        Assert.assertFalse(validateMyModulesWidget());
+        log.info("[My Modules] widget is not visible");
     }
 
     public void validateArraysAreEqual(List<String> expectedArrayOfModules, List<String> actualArrayOfModules) {
@@ -69,7 +87,7 @@ public class MyModuleWidget extends BasePageObject {
     public List<String> getAllModuleNames() {
         List<String> myModules = new ArrayList<>();
         for (WebElement element : getListOfModules()) {
-            myModules.add(element.getAttribute("innerText"));
+            myModules.add(element.getAttribute("textContent"));
         }
         return myModules;
     }
