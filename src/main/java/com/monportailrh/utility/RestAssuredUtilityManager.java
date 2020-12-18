@@ -22,6 +22,7 @@ public class RestAssuredUtilityManager {
 
     /**
      * Constructor that sets default request/response specification
+     *
      * @param userCredentials represents User credentials, used to set up actual User
      */
     public RestAssuredUtilityManager(Credential userCredentials) {

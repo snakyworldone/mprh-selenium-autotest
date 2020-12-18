@@ -6,7 +6,7 @@ import com.monportailrh.object.LoginPage;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.MyModuleWidget;
 import com.monportailrh.utility.model.User;
-import com.monportailrh.utility.model.Utility;
+import com.monportailrh.utility.Utility;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -38,11 +38,9 @@ public class MyModuleWidgetTest extends BaseTest {
         return usersList.iterator();
     }
 
-    // Test that checks links
-
     @Test(dataProvider = "nonAdminTestUsers")
     public void checkVisibilityOfMyModulesWidgetForNonAdmin(User testUser) {
-        log.info("Starting Test with Scenario: Check whether non Superadmin User has access to My Modules widget");
+        log.info("Starting Test to check MyModules widget visibility");
 
         // Logging In and Verifying Login
         loginPage = new LoginPage(driver, log);
@@ -50,14 +48,13 @@ public class MyModuleWidgetTest extends BaseTest {
 
         // Assert that My modules widget visible
         myModuleWidget = new MyModuleWidget(driver, log);
-        Assert.assertTrue(myModuleWidget.validateMyModulesWidgetIsVisible());
-        log.info("[My Modules] widget is visible");
+        myModuleWidget.validateMyModulesWidgetIsVisible();
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
-    public void checkModuleVisibilityForNonAdmins(User testUser) {
+    public void checkDisplayedModulesForNonAdmin(User testUser) {
         Utility utility = new Utility();
-        log.info("Starting Test with Scenario: Check Modules visibility based on permissions");
+        log.info("Starting Test to check Displayed modules");
 
         // Logging In and Verifying Login
         loginPage = new LoginPage(driver, log);
@@ -65,15 +62,30 @@ public class MyModuleWidgetTest extends BaseTest {
 
         // Assert that My modules widget visible
         myModuleWidget = new MyModuleWidget(driver, log);
-        Assert.assertTrue(myModuleWidget.validateMyModulesWidgetIsVisible());
-        log.info("[My Modules] widget is visible");
+        myModuleWidget.validateMyModulesWidgetIsVisible();
 
         List<String> expectedArrayOfModules = testUser.listAllModuleNames();
         List<String> actualArrayOfModules = myModuleWidget.getAllModuleNames();
+        myModuleWidget.validateArraysAreEqual(expectedArrayOfModules, actualArrayOfModules);
+    }
 
-        log.info("Actual array is: " + utility.listAllElements(actualArrayOfModules));
-        log.info("Expected array is: " + utility.listAllElements(expectedArrayOfModules));
+    @Test(dataProvider = "nonAdminTestUsers")
+    public void checkModuleRedirection(User testUser) {
+        Utility utility = new Utility();
+        log.info("Starting Test to check module redirection");
 
-        Assert.assertEquals(actualArrayOfModules, expectedArrayOfModules, "Actual and Expected arrays are different");
+        // Logging In and Verifying Login
+        LoginPage loginPage = new LoginPage(driver, log);
+        loginPage.validateLogin(testUser);
+
+        // Assert that My modules widget visible
+        MyModuleWidget myModuleWidget = new MyModuleWidget(driver, log);
+        myModuleWidget.validateMyModulesWidgetIsVisible();
+
+        List<String> expectedArrayOfModules = testUser.listAllModuleNames();
+        List<String> actualArrayOfModules = myModuleWidget.getAllModuleNames();
+        myModuleWidget.validateArraysAreEqual(expectedArrayOfModules, actualArrayOfModules);
+
+        myModuleWidget.validateAllAvailableModules(testUser);
     }
 }

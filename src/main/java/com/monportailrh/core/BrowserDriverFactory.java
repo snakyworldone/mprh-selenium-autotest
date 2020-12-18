@@ -23,7 +23,7 @@ public class BrowserDriverFactory {
         if ("Mac OS X".equals(currentOs)) {
             getConfiguredBrowserForMac(browser);
         } else {
-            System.out.println("Currently, this OS is not yet supported");
+            log.info("Currently, this OS is not yet supported");
         }
         return driver.get();
     }

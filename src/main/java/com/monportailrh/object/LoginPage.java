@@ -51,9 +51,7 @@ public class LoginPage extends BasePageObject {
         fillInUserName(testUser.getUsername());
         fillInPassword(testUser.getPassword());
         clickLoginButton();
-        log.info("Validating whether User logged in or not");
-        Assert.assertTrue(header.isLogoVisible());
-        log.info("User was successfully logged in");
+        header.validateLogin();
     }
 
 }

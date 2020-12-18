@@ -1,6 +1,7 @@
 package com.monportailrh.utility.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
@@ -10,5 +11,8 @@ public class Module {
     private String icon;
     private int id;
     private String name;
+    @JsonProperty("web_url")
     private String webUrl;
+    @JsonProperty("permissions")
+    private ModulePermission modulePermissions;
 }

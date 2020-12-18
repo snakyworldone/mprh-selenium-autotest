@@ -23,8 +23,14 @@ public class Header extends BasePageObject {
         super(driver, log);
     }
 
-    public boolean isLogoVisible() {
+    private boolean isLogoVisible() {
         waitForVisibilityOf(headerLogo, 5);
         return headerLogo.isDisplayed();
+    }
+
+    public void validateLogin() {
+        log.info("Validating whether User logged in or not");
+        Assert.assertTrue(isLogoVisible());
+        log.info("User was successfully logged in");
     }
 }

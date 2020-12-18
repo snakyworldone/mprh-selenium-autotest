@@ -1,7 +1,6 @@
 package com.monportailrh.utility.model;
 
 import com.monportailrh.object.BasePageObject;
-import com.monportailrh.utility.RestAssuredUtilityManager;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +20,7 @@ public class MyModuleWidget extends BasePageObject {
     private WebElement title;
     @FindAll({@FindBy(css = "div.px-2")})
     private List<WebElement> listOfModules;
+    //not unique xpath
     @FindBy(xpath = "//div[contains(@class, 'mb137')]//div[contains(@class, 'icon-down-arrow')]")
     private WebElement extendArrow;
 
@@ -29,17 +29,41 @@ public class MyModuleWidget extends BasePageObject {
 
     }
 
-    public void clickOnExtendArrow() {
+    private void clickOnExtendArrow() {
         click(extendArrow);
-        for (WebElement element : listOfModules) {
-            waitForClickabilityOf(element, 5);
+    }
+
+    private void validateModules(User testUser) {
+        String moduleName;
+        String actualUrl;
+        String expectedUrl;
+
+        for (WebElement element : getListOfModules()) {
+            moduleName = element.getAttribute("innerText");
+            expectedUrl = testUser.getMapOfModules().get(moduleName).getWebUrl();
+
+            log.info("Clicking on [" + moduleName + "] module");
+            element.click();
+            switchToNewTab(mainWindowHandle);
+            actualUrl = getCurrentUrl();
+
+            Assert.assertEquals(actualUrl, expectedUrl);
+            log.info("Actual URL equals to Expected");
+
+            closeCurrentTab();
+            switchToMainTab(mainWindowHandle);
         }
     }
 
     public void validateMyModulesWidgetIsVisible() {
-        waitForVisibilityOf(title, 5);
-        Assert.assertTrue(title.isDisplayed());
+        waitForVisibilityOf(getTitle(), 5);
+        Assert.assertTrue(getTitle().isDisplayed());
         log.info("[My Modules] widget is visible");
+    }
+
+    public void validateArraysAreEqual(List<String> expectedArrayOfModules, List<String> actualArrayOfModules) {
+        Assert.assertEquals(actualArrayOfModules, expectedArrayOfModules);
+        log.info("Arrays are equal");
     }
 
     public List<String> getAllModuleNames() {
@@ -50,24 +74,13 @@ public class MyModuleWidget extends BasePageObject {
         return myModules;
     }
 
-    public List<String> getAllModuleLinks(User testUser) {
+    public void validateAllAvailableModules(User testUser) {
         mainWindowHandle = driver.getWindowHandle();
-
         if (listOfModules.size() > MODULES_BEFORE_ICON) {
             clickOnExtendArrow();
         }
-
-        for (WebElement element : getListOfModules()) {
-            log.info("Clicking on [" + element.getAttribute("innerText") + "] module");
-            element.click();
-            switchToNewTab(mainWindowHandle);
-
-
-            log.info("Current URL is: " + getCurrentUrl());
-            log.info("Expected URL is: " + testUser.getListOfModules().);
-            closeCurrentTab();
-            switchToMainTab(mainWindowHandle);
-        }
+        validateModules(testUser);
+        log.info("All modules were successfully verified");
     }
 
 }

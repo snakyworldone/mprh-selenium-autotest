@@ -4,7 +4,9 @@ import com.monportailrh.utility.RestAssuredUtilityManager;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class User {
@@ -16,6 +18,8 @@ public class User {
     private List<String> listOfRoles;
     private List<Module> listOfModules;
 
+    private Map<String, Module> mapOfModules;
+
     public User(Credential userCredentials) {
         restAssuredUtilityManager = new RestAssuredUtilityManager(userCredentials);
         this.username = userCredentials.getUsername();
@@ -23,12 +27,22 @@ public class User {
         this.listOfModules = restAssuredUtilityManager.getListOfModules();
     }
 
+    public Map<String, Module> getMapOfModules() {
+        Map<String, Module> mapOfModules = new HashMap<>();
+        for (Module module : getListOfModules()) {
+            mapOfModules.put(module.getName(), module);
+        }
+        return mapOfModules;
+    }
+
     public List<String> listAllModuleNames() {
         List<String> listOfModuleNames = new ArrayList<>();
-        for (Module module : listOfModules) {
-            //if access=true
-            listOfModuleNames.add(module.getName());
-        }
+        getListOfModules().forEach((module
+                -> {
+            if (module.getModulePermissions().isAccess()) {
+                listOfModuleNames.add(module.getName());
+            }
+        }));
         return listOfModuleNames;
     }
 }

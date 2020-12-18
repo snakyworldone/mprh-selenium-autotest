@@ -6,8 +6,7 @@ import com.monportailrh.object.LoginPage;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.MyModuleWidget;
 import com.monportailrh.utility.model.User;
-import com.monportailrh.utility.model.Utility;
-import org.openqa.selenium.WebElement;
+import com.monportailrh.utility.Utility;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -23,15 +22,15 @@ public class SampleTest extends BaseTest {
     @DataProvider(name = "defaultUsers")
     public Iterator<Object[]> createData() {
         List<Object[]> usersList = new ArrayList<>();
-        usersList.add(new Object[]{new User(Credential.ANGELINA_JOLIE)});/*
+        usersList.add(new Object[]{new User(Credential.ANGELINA_JOLIE)});
         usersList.add(new Object[]{new User(Credential.BRAD_PITT)});
         usersList.add(new Object[]{new User(Credential.DOLPH_LUNDGREN)});
-        usersList.add(new Object[]{new User(Credential.JESSICA_ALBA)});*/
+        usersList.add(new Object[]{new User(Credential.JESSICA_ALBA)});
         return usersList.iterator();
     }
 
     @Test(dataProvider = "defaultUsers")
-    public void sampleTest(User testUser) throws InterruptedException {
+    public void sampleTest(User testUser) {
         Utility utility = new Utility();
         log.info("Starting Test to check module links");
 
@@ -53,21 +52,10 @@ public class SampleTest extends BaseTest {
         Assert.assertEquals(actualArrayOfModules, expectedArrayOfModules, "Actual and Expected arrays are different");
         log.info("Actual and Expected Module arrays are equal");
 
-        String parentWindowHandle = driver.getWindowHandle();
-
-        for (WebElement element : myModuleWidget.getListOfModules()) {
-            log.info("Clicking on [" + element.getAttribute("innerText") + "] module");
-            element.click();
-            ArrayList<String> openedTabs = new ArrayList<>(driver.getWindowHandles());
-            openedTabs.remove(parentWindowHandle);
-            driver.switchTo().window(openedTabs.get(0));
-            Thread.sleep(1000);
-            log.info("Current URL is: " + driver.getCurrentUrl());
-            driver.close();
-            driver.switchTo().window(parentWindowHandle);
-        }
+        myModuleWidget.validateAllAvailableModules(testUser);
 
 
-        testUser.getListOfModules()
+
+
     }
 }

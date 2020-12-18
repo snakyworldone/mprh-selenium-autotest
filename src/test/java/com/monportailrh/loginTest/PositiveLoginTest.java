@@ -8,7 +8,6 @@ import com.monportailrh.object.LoginPage;
 import com.monportailrh.utility.GeneralPropertyManger;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.User;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -28,7 +27,7 @@ public class PositiveLoginTest extends BaseTest {
     }
 
     @Test(dataProvider = "defaultUsers")
-    public void logInAsAdminTest(User user) {
+    public void logInAsTest(User user) {
         log.info("Starting positive login test with admin credentials");
         LoginPage loginPage = new LoginPage(driver, log);
 
@@ -42,9 +41,7 @@ public class PositiveLoginTest extends BaseTest {
         // Clicking on LogIn button
         loginPage.clickLoginButton();
         Header header = new Header(driver, log);
-
-        // Asserting that Header logo is visible
-        Assert.assertTrue(header.isLogoVisible());
+        header.validateLogin();
     }
 }
 

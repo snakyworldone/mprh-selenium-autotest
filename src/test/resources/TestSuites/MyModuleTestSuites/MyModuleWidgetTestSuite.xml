@@ -15,11 +15,21 @@
         </classes>
     </test>
 
-    <test name="Modules Visibility Test">
+    <test name="Modules Visibility on My Modules Widget Test">
         <classes>
             <class name="com.monportailrh.myModuleTest.MyModuleWidgetTest">
                 <methods>
-                    <include name="checkModuleVisibilityForNonAdmins"/>
+                    <include name="checkDisplayedModulesForNonAdmin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Modules Redirection on My Modules Widget Test">
+        <classes>
+            <class name="com.monportailrh.myModuleTest.MyModuleWidgetTest">
+                <methods>
+                    <include name="checkModuleRedirection"/>
                 </methods>
             </class>
         </classes>

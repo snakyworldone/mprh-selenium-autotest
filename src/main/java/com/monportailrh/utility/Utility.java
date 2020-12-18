@@ -1,4 +1,4 @@
-package com.monportailrh.utility.model;
+package com.monportailrh.utility;
 
 import java.util.Arrays;
 import java.util.List;
