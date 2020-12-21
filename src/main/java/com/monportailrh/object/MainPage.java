@@ -12,8 +12,8 @@ public class MainPage extends BasePageObject {
     private MyModuleWidget myModulesWidget;
 
 
-    public MainPage(WebDriver driver, Logger log) {
-        super(driver, log);
+    public MainPage(WebDriver driver) {
+        super(driver);
     }
 
     /*public boolean isMyWidgetVisible() {

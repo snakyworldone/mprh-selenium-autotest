@@ -1,5 +1,6 @@
 package com.monportailrh.object;
 
+import com.monportailrh.utility.AllureLogger;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,8 +20,8 @@ public class Header extends BasePageObject {
     @FindBy(id = "PopoverMyTeam")
     private WebElement headerMyTeam;
 
-    public Header(WebDriver driver, Logger log) {
-        super(driver, log);
+    public Header(WebDriver driver) {
+        super(driver);
     }
 
     private boolean isLogoVisible() {
@@ -29,8 +30,8 @@ public class Header extends BasePageObject {
     }
 
     public void validateLogin() {
-        log.info("Validating whether User logged in or not");
+        AllureLogger.logToAllure("Validating whether User logged in or not");
         Assert.assertTrue(isLogoVisible());
-        log.info("User was successfully logged in");
+        AllureLogger.logToAllure("User was successfully logged in");
     }
 }

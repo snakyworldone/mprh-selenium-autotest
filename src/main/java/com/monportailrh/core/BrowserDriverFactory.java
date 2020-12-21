@@ -1,5 +1,6 @@
 package com.monportailrh.core;
 
+import com.monportailrh.utility.AllureLogger;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,20 +11,19 @@ public class BrowserDriverFactory {
     private static final String SYSTEM_PROPERTY_FF = "webdriver.gecko.driver";
     private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private String browser;
-    private Logger log;
     private String currentOs = System.getProperty("os.name");
 
-    public BrowserDriverFactory(String browser, Logger log) {
+    public BrowserDriverFactory(String browser) {
         this.browser = browser.toLowerCase();
-        this.log = log;
     }
 
     public WebDriver createDriver() {
-        log.info("Creating driver: " + browser);
+        AllureLogger.logToAllure("Creating driver: " + browser);
+
         if ("Mac OS X".equals(currentOs)) {
             getConfiguredBrowserForMac(browser);
         } else {
-            log.info("Currently, this OS is not yet supported");
+            AllureLogger.logToAllure("Currently, this OS is not yet supported");
         }
         return driver.get();
     }

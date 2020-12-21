@@ -5,6 +5,7 @@ import com.monportailrh.core.BaseTest;
 import com.monportailrh.core.TestListener;
 import com.monportailrh.object.Header;
 import com.monportailrh.object.LoginPage;
+import com.monportailrh.utility.AllureLogger;
 import com.monportailrh.utility.GeneralPropertyManger;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.User;
@@ -31,8 +32,8 @@ public class PositiveLoginTest extends BaseTest {
 
     @Test(dataProvider = "defaultUsers")
     public void logInTest(User user) {
-        log.info("Starting positive login test with admin credentials");
-        LoginPage loginPage = new LoginPage(driver, log);
+        AllureLogger.logToAllure("Starting positive login test with admin credentials");
+        LoginPage loginPage = new LoginPage(driver);
 
         // Opening SSO LogIn page
         loginPage.openLoginPage(GeneralPropertyManger.BASE_URL);
@@ -43,7 +44,7 @@ public class PositiveLoginTest extends BaseTest {
 
         // Clicking on LogIn button
         loginPage.clickLoginButton();
-        Header header = new Header(driver, log);
+        Header header = new Header(driver);
         header.validateLogin();
     }
 }

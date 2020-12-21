@@ -3,6 +3,7 @@ package com.monportailrh.myModuleTest;
 import com.monportailrh.core.BaseTest;
 import com.monportailrh.core.TestListener;
 import com.monportailrh.object.LoginPage;
+import com.monportailrh.utility.AllureLogger;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.MyModuleWidget;
 import com.monportailrh.utility.model.User;
@@ -39,41 +40,41 @@ public class MyModuleWidgetTest extends BaseTest {
 
     @Test(dataProvider = "adminTestUsers")
     public void checkVisibilityOfMyModulesWidgetForAdmin(User testUser) {
-        log.info("Starting Test to check MyModules widget visibility");
+        AllureLogger.logToAllure("Starting Test to check MyModules widget visibility");
 
         // Logging In and Verifying Login
-        loginPage = new LoginPage(driver, log);
+        loginPage = new LoginPage(driver);
         loginPage.validateLogin(testUser);
 
         // Assert that My modules widget visible
-        myModuleWidget = new MyModuleWidget(driver, log);
+        myModuleWidget = new MyModuleWidget(driver);
         myModuleWidget.validateMyModulesWidgetIsNotVisible();
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
     public void checkVisibilityOfMyModulesWidgetForNonAdmin(User testUser) {
-        log.info("Starting Test to check MyModules widget visibility");
+        AllureLogger.logToAllure("Starting Test to check MyModules widget visibility");
 
         // Logging In and Verifying Login
-        loginPage = new LoginPage(driver, log);
+        loginPage = new LoginPage(driver);
         loginPage.validateLogin(testUser);
 
         // Assert that My modules widget visible
-        myModuleWidget = new MyModuleWidget(driver, log);
+        myModuleWidget = new MyModuleWidget(driver);
         myModuleWidget.validateMyModulesWidgetIsVisible();
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
     public void checkDisplayedModules(User testUser) {
         Utility utility = new Utility();
-        log.info("Starting Test to check Displayed modules");
+        AllureLogger.logToAllure("Starting Test to check Displayed modules");
 
         // Logging In and Verifying Login
-        loginPage = new LoginPage(driver, log);
+        loginPage = new LoginPage(driver);
         loginPage.validateLogin(testUser);
 
         // Assert that My modules widget visible
-        myModuleWidget = new MyModuleWidget(driver, log);
+        myModuleWidget = new MyModuleWidget(driver);
         myModuleWidget.validateMyModulesWidgetIsVisible();
 
         List<String> expectedArrayOfModules = testUser.listAllModuleNames();
@@ -84,14 +85,14 @@ public class MyModuleWidgetTest extends BaseTest {
     @Test(dataProvider = "nonAdminTestUsers")
     public void checkModuleRedirection(User testUser) {
         Utility utility = new Utility();
-        log.info("Starting Test to check module redirection");
+        AllureLogger.logToAllure("Starting Test to check module redirection");
 
         // Logging In and Verifying Login
-        LoginPage loginPage = new LoginPage(driver, log);
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.validateLogin(testUser);
 
         // Assert that My modules widget visible
-        MyModuleWidget myModuleWidget = new MyModuleWidget(driver, log);
+        MyModuleWidget myModuleWidget = new MyModuleWidget(driver);
         myModuleWidget.validateMyModulesWidgetIsVisible();
 
         List<String> expectedArrayOfModules = testUser.listAllModuleNames();

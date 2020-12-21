@@ -1,3 +1,4 @@
+/*
 package com.monportailrh;
 
 import com.monportailrh.core.BaseTest;
@@ -55,7 +56,6 @@ public class SampleTest extends BaseTest {
         myModuleWidget.validateAllAvailableModules(testUser);
 
 
-
-
     }
 }
+*/

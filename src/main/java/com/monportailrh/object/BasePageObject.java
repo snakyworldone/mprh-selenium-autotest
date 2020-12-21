@@ -15,14 +15,12 @@ import java.util.ArrayList;
 public class BasePageObject {
     protected final static String BASE_URL = GeneralPropertyManger.BASE_URL;
     protected WebDriver driver;
-    protected Logger log;
 
     public BasePageObject() {
     }
 
-    public BasePageObject(WebDriver driver, Logger log) {
+    public BasePageObject(WebDriver driver) {
         this.driver = driver;
-        this.log = log;
         PageFactory.initElements(driver, this);
     }
 

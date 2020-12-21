@@ -1,6 +1,7 @@
 package com.monportailrh.core;
 
 
+import com.monportailrh.utility.AllureLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
@@ -8,27 +9,28 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 public class TestListener implements ITestListener {
-    Logger log;
+    //Logger log;
     String testName;
     String testMethodName;
 
     @Override
     public void onTestStart(ITestResult result) {
         this.testMethodName = result.getMethod().getMethodName();
-        log.info("Starting [" + testMethodName + "]");
+        AllureLogger.logToAllure("Starting [" + testMethodName + "]");
+
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        log.info("Test [" + testMethodName + "] passed");
-        log.info("");
+        AllureLogger.logToAllure("Test [" + testMethodName + "] passed");
+        AllureLogger.logToAllure("");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        log.info("Test [" + testMethodName + "] failed");
-        log.info("ASSERTION ERROR: " + result.getThrowable());
-        log.info("");
+        AllureLogger.logToAllure("Test [" + testMethodName + "] failed");
+        AllureLogger.logToAllure("ASSERTION ERROR: " + result.getThrowable());
+        AllureLogger.logToAllure("");
     }
 
     @Override
@@ -46,13 +48,12 @@ public class TestListener implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
         this.testName = context.getCurrentXmlTest().getName();
-        this.log = LogManager.getLogger(testName);
-        log.info("TEST [" + testName + "] STARTED");
+        AllureLogger.logToAllure("TEST [" + testName + "] STARTED");
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        log.info("ALL [" + testName + "] FINISHED");
-        log.info("");
+        AllureLogger.logToAllure("ALL [" + testName + "] FINISHED");
+        AllureLogger.logToAllure("");
     }
 }

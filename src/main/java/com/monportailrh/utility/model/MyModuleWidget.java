@@ -1,6 +1,7 @@
 package com.monportailrh.utility.model;
 
 import com.monportailrh.object.BasePageObject;
+import com.monportailrh.utility.AllureLogger;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
@@ -26,8 +27,8 @@ public class MyModuleWidget extends BasePageObject {
     @FindBy(xpath = "//div[contains(@class, 'mb137')]//div[contains(@class, 'icon-down-arrow')]")
     private WebElement extendArrow;
 
-    public MyModuleWidget(WebDriver driver, Logger log) {
-        super(driver, log);
+    public MyModuleWidget(WebDriver driver) {
+        super(driver);
 
     }
 
@@ -44,13 +45,13 @@ public class MyModuleWidget extends BasePageObject {
             moduleName = getInnerText(element);
             expectedUrl = testUser.getMapOfModules().get(moduleName).getWebUrl();
 
-            log.info("Clicking on [" + moduleName + "] module");
+            AllureLogger.logToAllure("Clicking on [" + moduleName + "] module");
             element.click();
             switchToNewTab(mainWindowHandle);
             actualUrl = getCurrentUrl();
 
             Assert.assertEquals(actualUrl, expectedUrl);
-            log.info("Actual URL equals to Expected");
+            AllureLogger.logToAllure("Actual URL equals to Expected");
 
             closeCurrentTab();
             switchToMainTab(mainWindowHandle);
@@ -71,17 +72,17 @@ public class MyModuleWidget extends BasePageObject {
 
     public void validateMyModulesWidgetIsVisible() {
         Assert.assertTrue(validateMyModulesWidget());
-        log.info("[My Modules] widget is visible");
+        AllureLogger.logToAllure("[My Modules] widget is visible");
     }
 
     public void validateMyModulesWidgetIsNotVisible() {
         Assert.assertFalse(validateMyModulesWidget());
-        log.info("[My Modules] widget is not visible");
+        AllureLogger.logToAllure("[My Modules] widget is not visible");
     }
 
     public void validateArraysAreEqual(List<String> expectedArrayOfModules, List<String> actualArrayOfModules) {
         Assert.assertEquals(actualArrayOfModules, expectedArrayOfModules);
-        log.info("Arrays are equal");
+        AllureLogger.logToAllure("Arrays are equal");
     }
 
     public List<String> getAllModuleNames() {
@@ -98,7 +99,7 @@ public class MyModuleWidget extends BasePageObject {
             clickOnExtendArrow();
         }
         validateModules(testUser);
-        log.info("All modules were successfully verified");
+        AllureLogger.logToAllure("All modules were successfully verified");
     }
 
 }
