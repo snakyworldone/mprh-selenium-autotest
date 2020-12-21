@@ -61,6 +61,7 @@ public class BasePageObject {
 
     /**
      * Switch to another tab
+     *
      * @param mainTab requires to get new tab from a list
      */
     public void switchToNewTab(String mainTab) {
@@ -103,6 +104,10 @@ public class BasePageObject {
      */
     public String getCurrentPageSource() {
         return driver.getPageSource();
+    }
+
+    public String getInnerText(WebElement element) {
+        return element.getAttribute("textContent");
     }
 
     /**

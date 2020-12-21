@@ -41,7 +41,7 @@ public class MyModuleWidget extends BasePageObject {
         String expectedUrl;
 
         for (WebElement element : getListOfModules()) {
-            moduleName = element.getAttribute("textContent");
+            moduleName = getInnerText(element);
             expectedUrl = testUser.getMapOfModules().get(moduleName).getWebUrl();
 
             log.info("Clicking on [" + moduleName + "] module");
@@ -87,7 +87,7 @@ public class MyModuleWidget extends BasePageObject {
     public List<String> getAllModuleNames() {
         List<String> myModules = new ArrayList<>();
         for (WebElement element : getListOfModules()) {
-            myModules.add(element.getAttribute("textContent"));
+            myModules.add(getInnerText(element));
         }
         return myModules;
     }
