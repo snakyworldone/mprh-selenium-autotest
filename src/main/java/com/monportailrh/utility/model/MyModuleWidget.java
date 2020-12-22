@@ -35,7 +35,7 @@ public class MyModuleWidget extends BasePageObject {
         click(extendArrow);
     }
 
-    private void validateModules(User testUser) {
+    private void validateActualAndExpectedModuleLinks(User testUser) {
         String moduleName;
         String actualUrl;
         String expectedUrl;
@@ -81,13 +81,13 @@ public class MyModuleWidget extends BasePageObject {
         return this;
     }
 
-    public MyModuleWidget validateArraysAreEqual(List<String> expectedArrayOfModules, List<String> actualArrayOfModules) {
+    public MyModuleWidget validateActualAndExpectedModuleArraysAreEqual(List<String> expectedArrayOfModules, List<String> actualArrayOfModules) {
         Assert.assertEquals(actualArrayOfModules, expectedArrayOfModules);
         AllureLogger.logToAllure("Arrays are equal");
         return this;
     }
 
-    public List<String> getAllModuleNames() {
+    public List<String> getActualArrayOfModules() {
         List<String> myModules = new ArrayList<>();
         for (WebElement element : getListOfModules()) {
             myModules.add(getInnerText(element));
@@ -95,12 +95,16 @@ public class MyModuleWidget extends BasePageObject {
         return myModules;
     }
 
-    public MyModuleWidget validateAllAvailableModules(User testUser) {
+    public List<String> getExpectedArrayOfModules(User testUser) {
+        return testUser.listAllModuleNames();
+    }
+
+    public MyModuleWidget validateModuleRedirection(User testUser) {
         mainWindowHandle = driver.getWindowHandle();
         if (listOfModules.size() > MODULES_BEFORE_ICON) {
             clickOnExtendArrow();
         }
-        validateModules(testUser);
+        validateActualAndExpectedModuleLinks(testUser);
         AllureLogger.logToAllure("All modules were successfully verified");
         return this;
     }

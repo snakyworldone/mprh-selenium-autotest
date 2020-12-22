@@ -6,6 +6,9 @@ import com.monportailrh.core.TestListener;
 import com.monportailrh.utility.AllureLogger;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.User;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,6 +20,7 @@ import java.util.List;
 import static com.monportailrh.utility.GeneralPropertyManger.BASE_URL;
 
 @Listeners({TestListener.class})
+@Severity(SeverityLevel.CRITICAL)
 public class PositiveLoginTest extends BaseTest {
     @DataProvider(name = "defaultUsers")
     public Iterator<Object[]> createData() {
@@ -30,6 +34,7 @@ public class PositiveLoginTest extends BaseTest {
     }
 
     @Test(dataProvider = "defaultUsers")
+    @Description("This test checks whether User is being able to login with valid credentials")
     public void logInTest(User testUser) {
         AllureLogger.logToAllure("Starting positive login test with admin credentials");
 

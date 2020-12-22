@@ -1,6 +1,7 @@
 package com.monportailrh.utility.model;
 
 import com.monportailrh.utility.RestAssuredUtilityManager;
+import com.monportailrh.utility.Utility;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -44,5 +45,18 @@ public class User {
             }
         }));
         return listOfModuleNames;
+    }
+
+    @Override
+    public String toString() {
+        Utility utility = new Utility();
+        return "User{" +
+                ", name='" + getName() + '\'' +
+                ", surname='" + getSurname() + '\'' +
+                ", username='" + getUsername() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", listOfRoles=" + listOfRoles +
+                ", listOfModules=" + utility.listAllElements(listAllModuleNames()) +
+                '}';
     }
 }
