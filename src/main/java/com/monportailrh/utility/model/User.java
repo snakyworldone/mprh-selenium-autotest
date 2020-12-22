@@ -36,7 +36,7 @@ public class User {
         return mapOfModules;
     }
 
-    public List<String> listAllModuleNames() {
+    public List<String> getListWithAllModuleNames() {
         List<String> listOfModuleNames = new ArrayList<>();
         getListOfModules().forEach((module
                 -> {
@@ -51,12 +51,12 @@ public class User {
     public String toString() {
         Utility utility = new Utility();
         return "User{" +
-                ", name='" + getName() + '\'' +
+                "name='" + getName() + '\'' +
                 ", surname='" + getSurname() + '\'' +
                 ", username='" + getUsername() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 ", listOfRoles=" + listOfRoles +
-                ", listOfModules=" + utility.listAllElements(listAllModuleNames()) +
+                ", listOfModules=" + utility.listAllElements(getListWithAllModuleNames()) +
                 '}';
     }
 }

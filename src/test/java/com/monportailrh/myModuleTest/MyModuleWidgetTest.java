@@ -71,10 +71,14 @@ public class MyModuleWidgetTest extends BaseTest {
         myModuleWidget = baseRouter
                 .openLoginPage(BASE_URL)
                 .validateLogin(testUser, new MyModuleWidget(driver))
-                .validateMyModulesWidgetIsVisible()
-                .validateActualAndExpectedModuleArraysAreEqual(
-                        myModuleWidget.getExpectedArrayOfModules(testUser),
-                        myModuleWidget.getActualArrayOfModules());
+                .validateMyModulesWidgetIsVisible();
+
+
+        List<String> expectedArrayOfModules = testUser.getListWithAllModuleNames();
+        List<String> actualArrayOfModules = myModuleWidget.getActualArrayOfModules();
+
+        myModuleWidget
+                .validateActualAndExpectedModuleArraysAreEqual(expectedArrayOfModules, actualArrayOfModules);
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
@@ -85,10 +89,13 @@ public class MyModuleWidgetTest extends BaseTest {
         myModuleWidget = baseRouter
                 .openLoginPage(BASE_URL)
                 .validateLogin(testUser, new MyModuleWidget(driver))
-                .validateMyModulesWidgetIsVisible()
-                .validateActualAndExpectedModuleArraysAreEqual(
-                        myModuleWidget.getExpectedArrayOfModules(testUser),
-                        myModuleWidget.getActualArrayOfModules())
+                .validateMyModulesWidgetIsVisible();
+
+        List<String> expectedArrayOfModules = testUser.getListWithAllModuleNames();
+        List<String> actualArrayOfModules = myModuleWidget.getActualArrayOfModules();
+
+        myModuleWidget
+                .validateActualAndExpectedModuleArraysAreEqual(expectedArrayOfModules, actualArrayOfModules)
                 .validateModuleRedirection(testUser);
     }
 }

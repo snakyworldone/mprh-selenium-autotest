@@ -96,7 +96,7 @@ public class MyModuleWidget extends BasePageObject {
     }
 
     public List<String> getExpectedArrayOfModules(User testUser) {
-        return testUser.listAllModuleNames();
+        return testUser.getListWithAllModuleNames();
     }
 
     public MyModuleWidget validateModuleRedirection(User testUser) {
