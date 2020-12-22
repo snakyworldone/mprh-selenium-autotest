@@ -3,10 +3,7 @@ package com.monportailrh.loginTest;
 
 import com.monportailrh.core.BaseTest;
 import com.monportailrh.core.TestListener;
-import com.monportailrh.object.Header;
-import com.monportailrh.object.LoginPage;
 import com.monportailrh.utility.AllureLogger;
-import com.monportailrh.utility.GeneralPropertyManger;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.User;
 import org.testng.annotations.DataProvider;
@@ -16,6 +13,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static com.monportailrh.utility.GeneralPropertyManger.BASE_URL;
 
 @Listeners({TestListener.class})
 public class PositiveLoginTest extends BaseTest {
@@ -31,21 +30,15 @@ public class PositiveLoginTest extends BaseTest {
     }
 
     @Test(dataProvider = "defaultUsers")
-    public void logInTest(User user) {
+    public void logInTest(User testUser) {
         AllureLogger.logToAllure("Starting positive login test with admin credentials");
-        LoginPage loginPage = new LoginPage(driver);
 
-        // Opening SSO LogIn page
-        loginPage.openLoginPage(GeneralPropertyManger.BASE_URL);
-
-        // Providing Username and Password
-        loginPage.fillInUserName(user.getUsername());
-        loginPage.fillInPassword(user.getPassword());
-
-        // Clicking on LogIn button
-        loginPage.clickLoginButton();
-        Header header = new Header(driver);
-        header.validateLogin();
+        baseRouter
+                .openLoginPage(BASE_URL)
+                .fillInUserName(testUser.getUsername())
+                .fillInPassword(testUser.getPassword())
+                .clickLoginButton()
+                .validateLogin();
     }
 }
 

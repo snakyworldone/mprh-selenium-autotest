@@ -2,14 +2,11 @@ package com.monportailrh.core;
 
 
 import com.monportailrh.utility.AllureLogger;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 public class TestListener implements ITestListener {
-    //Logger log;
     String testName;
     String testMethodName;
 

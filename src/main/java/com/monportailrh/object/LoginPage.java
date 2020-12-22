@@ -2,11 +2,9 @@ package com.monportailrh.object;
 
 import com.monportailrh.utility.AllureLogger;
 import com.monportailrh.utility.model.User;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 public class LoginPage extends BasePageObject {
 
@@ -25,34 +23,30 @@ public class LoginPage extends BasePageObject {
         super(driver);
     }
 
-    public void openLoginPage(String url) {
-        AllureLogger.logToAllure("Opening page: " + url);
-        openUrl(url);
-        AllureLogger.logToAllure("Page opened!");
-    }
-
-    public void fillInUserName(String username) {
+    public LoginPage fillInUserName(String username) {
         AllureLogger.logToAllure("Providing [" + username + "] into username input field");
         type(username, userNameInput);
+        return this;
     }
 
-    public void fillInPassword(String password) {
+    public LoginPage fillInPassword(String password) {
         AllureLogger.logToAllure("Providing [" + password + "] into password input field");
         type(password, passwordInput);
+        return this;
     }
 
-    public void clickLoginButton() {
+    public Header clickLoginButton() {
         AllureLogger.logToAllure("Clicking on Login button");
         click(loginButton);
+        return new Header(driver);
     }
 
-    public void validateLogin(User testUser) {
-        Header header = new Header(driver);
-        openLoginPage(BASE_URL);
-        fillInUserName(testUser.getUsername());
-        fillInPassword(testUser.getPassword());
-        clickLoginButton();
-        header.validateLogin();
+    public <T> T validateLogin(User testUser, T t) {
+        fillInUserName(testUser.getUsername())
+                .fillInPassword(testUser.getPassword())
+                .clickLoginButton()
+                .validateLogin();
+        return t;
     }
 
 }

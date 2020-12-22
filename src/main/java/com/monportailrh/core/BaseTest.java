@@ -3,8 +3,6 @@ package com.monportailrh.core;
 import com.monportailrh.utility.AllureLogger;
 import com.monportailrh.utility.GeneralPropertyManger;
 import io.restassured.RestAssured;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -18,6 +16,7 @@ public class BaseTest {
     private static final String PROPERTY_PATH_PARAMETER = "propertiesFilePath";
 
     protected WebDriver driver;
+    protected BaseRouter baseRouter;
 
     @Parameters({PROPERTY_PATH_PARAMETER})
     @BeforeSuite(alwaysRun = true)
@@ -29,17 +28,15 @@ public class BaseTest {
     @Parameters({BROWSER_PARAMETER})
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method, @Optional(CHROME_DRIVER_NAME) String browser, ITestContext ctx) {
-        // String testName = ctx.getCurrentXmlTest().getName();
-
         BrowserDriverFactory factory = new BrowserDriverFactory(browser);
         driver = factory.createDriver();
         driver.manage().window().maximize();
+        baseRouter = new BaseRouter(driver);
     }
 
     @AfterMethod
     public void tearDown() {
         AllureLogger.logToAllure("Closing driver");
-
         driver.quit();
     }
 }

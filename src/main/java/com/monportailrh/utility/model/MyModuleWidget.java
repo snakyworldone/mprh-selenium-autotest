@@ -3,7 +3,6 @@ package com.monportailrh.utility.model;
 import com.monportailrh.object.BasePageObject;
 import com.monportailrh.utility.AllureLogger;
 import lombok.Data;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -70,19 +69,22 @@ public class MyModuleWidget extends BasePageObject {
         }
     }
 
-    public void validateMyModulesWidgetIsVisible() {
+    public MyModuleWidget validateMyModulesWidgetIsVisible() {
         Assert.assertTrue(validateMyModulesWidget());
         AllureLogger.logToAllure("[My Modules] widget is visible");
+        return this;
     }
 
-    public void validateMyModulesWidgetIsNotVisible() {
+    public MyModuleWidget validateMyModulesWidgetIsNotVisible() {
         Assert.assertFalse(validateMyModulesWidget());
         AllureLogger.logToAllure("[My Modules] widget is not visible");
+        return this;
     }
 
-    public void validateArraysAreEqual(List<String> expectedArrayOfModules, List<String> actualArrayOfModules) {
+    public MyModuleWidget validateArraysAreEqual(List<String> expectedArrayOfModules, List<String> actualArrayOfModules) {
         Assert.assertEquals(actualArrayOfModules, expectedArrayOfModules);
         AllureLogger.logToAllure("Arrays are equal");
+        return this;
     }
 
     public List<String> getAllModuleNames() {
@@ -93,13 +95,14 @@ public class MyModuleWidget extends BasePageObject {
         return myModules;
     }
 
-    public void validateAllAvailableModules(User testUser) {
+    public MyModuleWidget validateAllAvailableModules(User testUser) {
         mainWindowHandle = driver.getWindowHandle();
         if (listOfModules.size() > MODULES_BEFORE_ICON) {
             clickOnExtendArrow();
         }
         validateModules(testUser);
         AllureLogger.logToAllure("All modules were successfully verified");
+        return this;
     }
 
 }

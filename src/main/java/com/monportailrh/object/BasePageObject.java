@@ -1,7 +1,5 @@
 package com.monportailrh.object;
 
-import com.monportailrh.utility.GeneralPropertyManger;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 
 public class BasePageObject {
-    protected final static String BASE_URL = GeneralPropertyManger.BASE_URL;
     protected WebDriver driver;
 
     public BasePageObject() {
@@ -117,20 +114,6 @@ public class BasePageObject {
         while (attempts < 2) {
             try {
                 waitFor(ExpectedConditions.visibilityOf(element),
-                        (timeOutInSeconds.length > 0 ? timeOutInSeconds[0] : null));
-                break;
-            } catch (StaleElementReferenceException e) {
-                e.printStackTrace();
-            }
-            attempts++;
-        }
-    }
-
-    protected void waitForClickabilityOf(WebElement element, Integer... timeOutInSeconds) {
-        int attempts = 0;
-        while (attempts < 2) {
-            try {
-                waitFor(ExpectedConditions.elementToBeClickable(element),
                         (timeOutInSeconds.length > 0 ? timeOutInSeconds[0] : null));
                 break;
             } catch (StaleElementReferenceException e) {

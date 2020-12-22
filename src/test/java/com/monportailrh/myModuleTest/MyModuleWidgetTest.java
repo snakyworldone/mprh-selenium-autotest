@@ -2,12 +2,10 @@ package com.monportailrh.myModuleTest;
 
 import com.monportailrh.core.BaseTest;
 import com.monportailrh.core.TestListener;
-import com.monportailrh.object.LoginPage;
 import com.monportailrh.utility.AllureLogger;
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.MyModuleWidget;
 import com.monportailrh.utility.model.User;
-import com.monportailrh.utility.Utility;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -16,9 +14,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.monportailrh.utility.GeneralPropertyManger.BASE_URL;
+
 @Listeners({TestListener.class})
 public class MyModuleWidgetTest extends BaseTest {
-    private LoginPage loginPage;
     private MyModuleWidget myModuleWidget;
 
     @DataProvider(name = "nonAdminTestUsers")
@@ -42,63 +41,52 @@ public class MyModuleWidgetTest extends BaseTest {
     public void checkVisibilityOfMyModulesWidgetForAdmin(User testUser) {
         AllureLogger.logToAllure("Starting Test to check MyModules widget visibility");
 
-        // Logging In and Verifying Login
-        loginPage = new LoginPage(driver);
-        loginPage.validateLogin(testUser);
-
-        // Assert that My modules widget visible
-        myModuleWidget = new MyModuleWidget(driver);
-        myModuleWidget.validateMyModulesWidgetIsNotVisible();
+        myModuleWidget = baseRouter
+                .openLoginPage(BASE_URL)
+                .validateLogin(testUser, new MyModuleWidget(driver))
+                .validateMyModulesWidgetIsNotVisible();
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
     public void checkVisibilityOfMyModulesWidgetForNonAdmin(User testUser) {
         AllureLogger.logToAllure("Starting Test to check MyModules widget visibility");
 
-        // Logging In and Verifying Login
-        loginPage = new LoginPage(driver);
-        loginPage.validateLogin(testUser);
-
-        // Assert that My modules widget visible
-        myModuleWidget = new MyModuleWidget(driver);
-        myModuleWidget.validateMyModulesWidgetIsVisible();
+        myModuleWidget = baseRouter
+                .openLoginPage(BASE_URL)
+                .validateLogin(testUser, new MyModuleWidget(driver))
+                .validateMyModulesWidgetIsVisible();
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
     public void checkDisplayedModules(User testUser) {
-        Utility utility = new Utility();
         AllureLogger.logToAllure("Starting Test to check Displayed modules");
 
-        // Logging In and Verifying Login
-        loginPage = new LoginPage(driver);
-        loginPage.validateLogin(testUser);
-
-        // Assert that My modules widget visible
-        myModuleWidget = new MyModuleWidget(driver);
-        myModuleWidget.validateMyModulesWidgetIsVisible();
+        myModuleWidget = baseRouter
+                .openLoginPage(BASE_URL)
+                .validateLogin(testUser, new MyModuleWidget(driver))
+                .validateMyModulesWidgetIsVisible();
 
         List<String> expectedArrayOfModules = testUser.listAllModuleNames();
         List<String> actualArrayOfModules = myModuleWidget.getAllModuleNames();
-        myModuleWidget.validateArraysAreEqual(expectedArrayOfModules, actualArrayOfModules);
+
+        myModuleWidget
+                .validateArraysAreEqual(expectedArrayOfModules, actualArrayOfModules);
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
     public void checkModuleRedirection(User testUser) {
-        Utility utility = new Utility();
         AllureLogger.logToAllure("Starting Test to check module redirection");
 
-        // Logging In and Verifying Login
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.validateLogin(testUser);
-
-        // Assert that My modules widget visible
-        MyModuleWidget myModuleWidget = new MyModuleWidget(driver);
-        myModuleWidget.validateMyModulesWidgetIsVisible();
+        myModuleWidget = baseRouter
+                .openLoginPage(BASE_URL)
+                .validateLogin(testUser, new MyModuleWidget(driver))
+                .validateMyModulesWidgetIsVisible();
 
         List<String> expectedArrayOfModules = testUser.listAllModuleNames();
         List<String> actualArrayOfModules = myModuleWidget.getAllModuleNames();
-        myModuleWidget.validateArraysAreEqual(expectedArrayOfModules, actualArrayOfModules);
 
-        myModuleWidget.validateAllAvailableModules(testUser);
+        myModuleWidget
+                .validateArraysAreEqual(expectedArrayOfModules, actualArrayOfModules)
+                .validateAllAvailableModules(testUser);
     }
 }
