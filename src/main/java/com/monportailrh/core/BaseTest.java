@@ -10,7 +10,7 @@ import org.testng.annotations.*;
 import java.lang.reflect.Method;
 
 public class BaseTest {
-    private static final String CHROME_DRIVER_NAME = "chrome";
+    private static final String CHROME_DRIVER_NAME = "chrome --headless";
     private static final String DEFAULT_CONFIG_PATH = "config/qa.properties";
     private static final String BROWSER_PARAMETER = "browser";
     private static final String PROPERTY_PATH_PARAMETER = "propertiesFilePath";

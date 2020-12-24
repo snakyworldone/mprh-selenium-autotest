@@ -2,6 +2,7 @@ package com.monportailrh.utility;
 
 import com.monportailrh.utility.model.Credential;
 import com.monportailrh.utility.model.Module;
+import com.monportailrh.utility.model.User;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -66,7 +67,7 @@ public class RestAssuredUtilityManager {
                 .then().extract().body().jsonPath();
     }
 
-    public List<Module> getListOfModules() {
-        return getMeInfo().getList("data.modules", Module.class);
+    public User getUser() {
+        return getMeInfo().getObject("data", User.class);
     }
 }
