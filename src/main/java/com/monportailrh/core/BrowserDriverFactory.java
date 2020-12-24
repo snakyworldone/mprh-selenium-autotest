@@ -42,7 +42,6 @@ public class BrowserDriverFactory {
                 System.setProperty(SYSTEM_PROPERTY_CHROME, SYSTEM_PROPERTY_CHROME_PATH);
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--headless");
-                chromeOptions.addArguments("--window-size=1920,1200");
                 driver.set(new ChromeDriver(chromeOptions));
                 break;
             case "firefox":

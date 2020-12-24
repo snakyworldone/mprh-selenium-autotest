@@ -3,6 +3,7 @@ package com.monportailrh.core;
 import com.monportailrh.utility.AllureLogger;
 import com.monportailrh.utility.GeneralPropertyManger;
 import io.restassured.RestAssured;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -30,7 +31,8 @@ public class BaseTest {
     public void setUp(Method method, @Optional(CHROME_DRIVER_NAME) String browser, ITestContext ctx) {
         BrowserDriverFactory factory = new BrowserDriverFactory(browser);
         driver = factory.createDriver();
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(1920, 1200));
         baseRouter = new BaseRouter(driver);
     }
 
