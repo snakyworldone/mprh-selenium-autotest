@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class BrowserDriverFactory {
     private static final String SYSTEM_PROPERTY_CHROME = "webdriver.chrome.driver";
@@ -13,8 +14,8 @@ public class BrowserDriverFactory {
     private static final String SYSTEM_PROPERTY_FIREFOX_PATH = "\"src/main/resources/drivers/mac/geckodriver";
 
     private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private String browser;
     private String currentOs = System.getProperty("os.name");
+    private String browser;
 
     public BrowserDriverFactory(String browser) {
         this.browser = browser.toLowerCase();
@@ -31,7 +32,6 @@ public class BrowserDriverFactory {
         return driver.get();
     }
 
-    // Move these paths to config
     private void getConfiguredBrowserForMac(String browser) {
         switch (browser) {
             case "chrome":
@@ -40,9 +40,7 @@ public class BrowserDriverFactory {
                 break;
             case "chrome --headless":
                 System.setProperty(SYSTEM_PROPERTY_CHROME, SYSTEM_PROPERTY_CHROME_PATH);
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless");
-                driver.set(new ChromeDriver(chromeOptions));
+                driver.set(new RemoteWebDriver(new ChromeOptions().addArguments("--headless")));
                 break;
             case "firefox":
                 System.setProperty(SYSTEM_PROPERTY_FF, SYSTEM_PROPERTY_FIREFOX_PATH);
