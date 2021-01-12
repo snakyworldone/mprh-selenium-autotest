@@ -9,9 +9,10 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 
 public class BaseTest {
-    private static final String CHROME_DRIVER_NAME = "chrome";// --headless";
+    private static final String CHROME_DRIVER_NAME = "chrome --headless";
     private static final String DEFAULT_CONFIG_PATH = "config/qa.properties";
     private static final String BROWSER_PARAMETER = "browser";
     private static final String PROPERTY_PATH_PARAMETER = "propertiesFilePath";
@@ -28,7 +29,7 @@ public class BaseTest {
 
     @Parameters({BROWSER_PARAMETER})
     @BeforeMethod(alwaysRun = true)
-    public void setUp(Method method, @Optional(CHROME_DRIVER_NAME) String browser, ITestContext ctx) {
+    public void setUp(Method method, @Optional(CHROME_DRIVER_NAME) String browser, ITestContext ctx) throws MalformedURLException {
         BrowserDriverFactory factory = new BrowserDriverFactory(browser);
         driver = factory.createDriver();
         //driver.manage().window().maximize();

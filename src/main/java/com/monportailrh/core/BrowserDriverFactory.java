@@ -7,6 +7,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class BrowserDriverFactory {
     private static final String SYSTEM_PROPERTY_CHROME = "webdriver.chrome.driver";
     private static final String SYSTEM_PROPERTY_FF = "webdriver.gecko.driver";
@@ -21,7 +24,7 @@ public class BrowserDriverFactory {
         this.browser = browser.toLowerCase();
     }
 
-    public WebDriver createDriver() {
+    public WebDriver createDriver() throws MalformedURLException {
         AllureLogger.logToAllure("Creating driver: " + browser);
 
         if ("Mac OS X".equals(currentOs)) {
@@ -32,7 +35,7 @@ public class BrowserDriverFactory {
         return driver.get();
     }
 
-    private void getConfiguredBrowserForMac(String browser) {
+    private void getConfiguredBrowserForMac(String browser) throws MalformedURLException {
         switch (browser) {
             case "chrome":
                 System.setProperty(SYSTEM_PROPERTY_CHROME, SYSTEM_PROPERTY_CHROME_PATH);
@@ -40,7 +43,8 @@ public class BrowserDriverFactory {
                 break;
             case "chrome --headless":
                 System.setProperty(SYSTEM_PROPERTY_CHROME, SYSTEM_PROPERTY_CHROME_PATH);
-                driver.set(new RemoteWebDriver(new ChromeOptions().addArguments("--headless")));
+                //driver.set(new RemoteWebDriver(new ChromeOptions().addArguments("--headless")));
+                driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), new ChromeOptions().addArguments("--headless")));
                 break;
             case "firefox":
                 System.setProperty(SYSTEM_PROPERTY_FF, SYSTEM_PROPERTY_FIREFOX_PATH);
