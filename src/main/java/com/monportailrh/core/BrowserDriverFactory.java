@@ -44,6 +44,7 @@ public class BrowserDriverFactory {
             case "chrome --headless":
                 System.setProperty(SYSTEM_PROPERTY_CHROME, SYSTEM_PROPERTY_CHROME_PATH);
                 //driver.set(new RemoteWebDriver(new ChromeOptions().addArguments("--headless")));
+                //setHeadless(true)
                 driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), new ChromeOptions().addArguments("--headless")));
                 break;
             case "firefox":
