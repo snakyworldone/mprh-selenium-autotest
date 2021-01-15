@@ -5,6 +5,8 @@ jobs:
       - image: circleci/openjdk:stretch     
     steps:       
       - checkout
+      - run: pwd
+      - run: ls -lah
       - run: echo $CONFIG_QA | base64 --decode > config/qa.properties
       - run: mvn test   
 
