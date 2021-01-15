@@ -53,7 +53,7 @@ public class GeneralPropertyManger {
         InputStream input = null;
 
         try {
-            input = new FileInputStream(path);
+            input = new FileInputStream(System.getProperty("user.dir") + "/" + path);
             properties.load(input);
             return properties;
         } catch (IOException ex) {
