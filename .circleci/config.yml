@@ -1,16 +1,13 @@
 version: 2.1
-
-orbs:
-  maven: circleci/maven@0.0.12
 jobs:
-  run_tests:
-    steps:
-      - run: 
-        name: "Setup config"
-        command: echo $CONFIG_QA | base64 --decode > config/qa.properties
-      - run: 
-        name: "Run tests"
-        command: maven/test # checkout, build, test, and upload test results
+  run_tests: 
+    docker:       
+      - image: circleci/openjdk:stretch     
+    steps:       
+      - checkout
+      - run: echo $CONFIG_QA | base64 --decode > config/qa.properties
+      - run: mvn test   
+
 workflows:
   maven_test:
     jobs:
