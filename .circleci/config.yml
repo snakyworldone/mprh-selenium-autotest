@@ -9,6 +9,8 @@ jobs:
       - setup_remote_docker
       - run: mkdir -p config
       - run: echo $CONFIG_QA | base64 --decode > config/qa.properties
+      - run: docker ps -a
+      - run: docker network ls
       - run: docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
       - run: mvn test   
 
