@@ -2,11 +2,14 @@ version: 2.1
 jobs:
   run_tests: 
     docker:      
-      - image: markhobson/maven-chrome:latest
+      - image: circleci/openjdk:stretch
+#      - image: selenium/standalone-chrome:latest
     steps:       
       - checkout
+      - setup_remote_docker
       - run: mkdir -p config
       - run: echo $CONFIG_QA | base64 --decode > config/qa.properties
+      - run: docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
       - run: mvn test   
 
 workflows:
