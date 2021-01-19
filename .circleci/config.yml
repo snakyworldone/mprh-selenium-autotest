@@ -2,8 +2,8 @@ version: 2.1
 jobs:
   run_tests: 
     docker:      
+      - image: circleci/openjdk:stretch
       - image: selenium/standalone-chrome:latest
-      - image: maven:latest
     steps:       
       - checkout
       - run: mkdir -p config
