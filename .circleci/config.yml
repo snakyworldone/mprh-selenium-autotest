@@ -3,7 +3,7 @@ jobs:
   run_tests: 
     docker:      
       - image: circleci/openjdk:stretch
-#      - image: selenium/standalone-chrome:latest
+      - image: selenium/standalone-chrome:latest
     steps:       
       - checkout
       - setup_remote_docker
