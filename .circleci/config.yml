@@ -1,7 +1,8 @@
 version: 2.1
 jobs:
   run_tests: 
-    docker:       
+    docker:      
+      - image: selenium/standalone-chrome:latest
       - image: circleci/openjdk:stretch     
     steps:       
       - checkout
