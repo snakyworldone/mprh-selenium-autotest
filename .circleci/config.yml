@@ -2,12 +2,7 @@ version: 2.1
 jobs:
   run_tests: 
     docker:      
-      - image: circleci/openjdk:stretch
-      - image: selenium/standalone-chrome:latest
-        environment:
-          - NODE_PORT=4444
-          - NODE_MAX_SESSION=5
-          - NODE_MAX_INSTANCES=5
+      - image: markhobson/maven-chrome:latest
     steps:       
       - checkout
       - run: mkdir -p config
