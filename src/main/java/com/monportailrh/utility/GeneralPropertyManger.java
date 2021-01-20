@@ -11,6 +11,7 @@ public class GeneralPropertyManger {
     public static String BASE_URL;
     public static String BASE_URL_API;
     public static String CLIENT_ID;
+    public static String REMOTE_DRIVER_URL;
     public static String SUPERADMIN_USERNAME;
     public static String SUPERADMIN_PASSWORD;
     public static String ANGELINA_JOLIE_USERNAME;
@@ -36,6 +37,7 @@ public class GeneralPropertyManger {
         BASE_URL = PROP_FILE.getProperty("BASE_URL");
         BASE_URL_API = PROP_FILE.getProperty("BASE_URL_API");
         CLIENT_ID = PROP_FILE.getProperty("CLIENT_ID");
+        REMOTE_DRIVER_URL = PROP_FILE.getProperty("REMOTE_DRIVER_URL");
         SUPERADMIN_USERNAME = PROP_FILE.getProperty("SUPERADMIN_USERNAME");
         SUPERADMIN_PASSWORD = PROP_FILE.getProperty("SUPERADMIN_PASSWORD");
         ANGELINA_JOLIE_USERNAME = PROP_FILE.getProperty("ANGELINA_JOLIE_USERNAME");
