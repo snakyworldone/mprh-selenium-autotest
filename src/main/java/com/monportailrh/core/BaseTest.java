@@ -32,7 +32,6 @@ public class BaseTest {
     public void setUp(Method method, @Optional(CHROME_DRIVER_NAME) String browser, ITestContext ctx) throws MalformedURLException {
         BrowserDriverFactory factory = new BrowserDriverFactory(browser);
         driver = factory.createDriver();
-        //driver.manage().window().maximize();
         driver.manage().window().setSize(new Dimension(1920, 1200));
         baseRouter = new BaseRouter(driver);
     }
