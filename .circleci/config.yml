@@ -27,8 +27,8 @@ workflows:
   maven_test:
     jobs:
       - approve:
-        name: "Run tests on dev?"
-        type: approval
+          name: "Run tests on dev?"
+          type: approval
       - run_tests:
           name: "Running tests"
           target_env: "develop"
@@ -36,8 +36,8 @@ workflows:
             - "Run tests on dev?"
 
       - approve:
-        name: "Run tests on QA?"
-        type: approval
+          name: "Run tests on QA?"
+          type: approval
       - run_tests:
           name: "Running tests"
           target_env: "qa"
@@ -45,8 +45,8 @@ workflows:
             - "Run tests on QA?"
 
       - approve:
-        name: "Run tests on PreProd?"
-        type: approval
+          name: "Run tests on PreProd?"
+          type: approval
       - run_tests:
           name: "Running tests"
           target_env: "staging"
@@ -54,8 +54,8 @@ workflows:
             - "Run tests on PreProd?"
 
       - approve:
-        name: "Run tests on Prod?"
-        type: approval
+          name: "Run tests on Prod?"
+          type: approval
       - run_tests:
           name: "Running tests"
           target_env: "production"
