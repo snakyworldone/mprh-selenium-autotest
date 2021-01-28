@@ -1,32 +1,63 @@
 version: 2.1
 jobs:
-  run_tests: 
-    docker:      
+  run_tests:
+    docker:
       - image: circleci/openjdk:stretch
       - image: selenium/standalone-chrome:latest
-      - image: frankescobar/allure-docker-service
-    steps:       
+    parameters:
+      target_env:
+        type: enum
+        enum:
+          - "develop"
+          - "qa"
+          - "staging"
+          - "production"
+    steps:
       - checkout
       - setup_remote_docker
       - run: mkdir -p config
-      - run: echo $CONFIG_QA | base64 --decode > config/qa.properties
+      - run: echo $config_<< parameters.target_env >> | base64 --decode > config/qa.properties
       - run: docker network create grid
       - run: docker run -d -p 4444:4444 --net grid -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
       - run: docker ps -a
       - run: docker network ls
-      - run: mvn test   
+      - run: mvn test
 
 workflows:
   maven_test:
     jobs:
-      - run_tests
+      - approve:
+          name: "Run tests on dev?"
+          type: approval
+      - run_tests:
+          name: "Running tests"
+          target_env: "develop"
+          requires:
+            - "Run tests on dev?"
 
+      - approve:
+          name: "Run tests on QA?"
+          type: approval
+      - run_tests:
+          name: "Running tests"
+          target_env: "qa"
+          requires:
+            - "Run tests on QA?"
 
- 
+      - approve:
+          name: "Run tests on PreProd?"
+          type: approval
+      - run_tests:
+          name: "Running tests"
+          target_env: "staging"
+          requires:
+            - "Run tests on PreProd?"
 
-
-
-
-
-
-
+      - approve:
+          name: "Run tests on Prod?"
+          type: approval
+      - run_tests:
+          name: "Running tests"
+          target_env: "production"
+          requires:
+            - "Run tests on Prod?"
