@@ -7,8 +7,8 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 public class TestListener implements ITestListener {
-    String testName;
-    String testMethodName;
+    private String testName;
+    private String testMethodName;
 
     @Override
     public void onTestStart(ITestResult result) {
