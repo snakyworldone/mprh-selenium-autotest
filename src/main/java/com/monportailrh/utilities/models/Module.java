@@ -1,4 +1,4 @@
-package com.monportailrh.utility.model;
+package com.monportailrh.utilities.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,5 +14,5 @@ public class Module {
     @JsonProperty("web_url")
     private String webUrl;
     @JsonProperty("permissions")
-    private ModulePermission modulePermissions;
+    private ModulePermissions modulePermissions;
 }

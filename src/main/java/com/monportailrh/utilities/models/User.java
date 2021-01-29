@@ -1,9 +1,9 @@
-package com.monportailrh.utility.model;
+package com.monportailrh.utilities.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.monportailrh.utility.RestAssuredUtilityManager;
-import com.monportailrh.utility.Utility;
+import com.monportailrh.utilities.RestAssuredUtilityManager;
+import com.monportailrh.utilities.Utilities;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class User {
     public User() {
     }
 
-    public User(Credential userCredentials) {
+    public User(Credentials userCredentials) {
         restAssuredUtilityManager = new RestAssuredUtilityManager(userCredentials);
         this.username = userCredentials.getUsername();
         this.password = userCredentials.getPassword();
@@ -60,14 +60,14 @@ public class User {
 
     @Override
     public String toString() {
-        Utility utility = new Utility();
+        Utilities utilities = new Utilities();
         return "User {" + "\n" +
                 "\tname ='" + getName() + '\'' + "\n" +
                 ", \tsurname = '" + getSurname() + '\'' + "\n" +
                 ", \tusername = '" + getUsername() + '\'' + "\n" +
                 ", \tpassword = '" + getPassword() + '\'' + "\n" +
                 ", \tlistOfRoles = " + listOfRoles + "\n" +
-                ", \tlistOfModules = " + utility.listAllElements(getListWithAllModuleNames()) + "\n" +
+                ", \tlistOfModules = " + utilities.listAllElements(getListWithAllModuleNames()) + "\n" +
                 '}';
     }
 }

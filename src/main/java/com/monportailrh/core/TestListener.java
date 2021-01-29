@@ -1,7 +1,10 @@
 package com.monportailrh.core;
 
 
-import com.monportailrh.utility.AllureLogger;
+import com.monportailrh.utilities.AllureLogger;
+import com.monportailrh.utilities.Utilities;
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -14,7 +17,6 @@ public class TestListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         this.testMethodName = result.getMethod().getMethodName();
         AllureLogger.logToAllure("Starting [" + testMethodName + "]");
-
     }
 
     @Override
@@ -25,7 +27,12 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
+        Utilities utilities = new Utilities();
+        WebDriver driver = (WebDriver) result.getTestContext().getAttribute("webDriver");
+        utilities.saveScreenshot(driver);
+
         AllureLogger.logToAllure("Test [" + testMethodName + "] failed");
+        AllureLogger.logToAllure("Screenshot captured");
         AllureLogger.logToAllure("ASSERTION ERROR: " + result.getThrowable());
         AllureLogger.logToAllure("");
     }
@@ -33,13 +40,11 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSkipped(ITestResult result) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
         // TODO Auto-generated method stub
-
     }
 
     @Override

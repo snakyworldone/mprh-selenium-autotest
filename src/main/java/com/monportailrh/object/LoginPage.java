@@ -1,7 +1,7 @@
 package com.monportailrh.object;
 
-import com.monportailrh.utility.AllureLogger;
-import com.monportailrh.utility.model.User;
+import com.monportailrh.utilities.AllureLogger;
+import com.monportailrh.utilities.models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

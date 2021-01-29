@@ -1,4 +1,4 @@
-package com.monportailrh.utility;
+package com.monportailrh.utilities;
 
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;

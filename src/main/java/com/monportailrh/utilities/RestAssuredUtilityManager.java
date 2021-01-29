@@ -1,8 +1,7 @@
-package com.monportailrh.utility;
+package com.monportailrh.utilities;
 
-import com.monportailrh.utility.model.Credential;
-import com.monportailrh.utility.model.Module;
-import com.monportailrh.utility.model.User;
+import com.monportailrh.utilities.models.Credentials;
+import com.monportailrh.utilities.models.User;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -10,8 +9,6 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -26,7 +23,7 @@ public class RestAssuredUtilityManager {
      *
      * @param userCredentials represents User credentials, used to set up actual User
      */
-    public RestAssuredUtilityManager(Credential userCredentials) {
+    public RestAssuredUtilityManager(Credentials userCredentials) {
         fieldsRequestSpecification = new RequestSpecBuilder()
                 .addHeader("Authorization", "Bearer " + getBearerToken(userCredentials))
                 .addHeader("Accept-Language", "en")
@@ -38,7 +35,7 @@ public class RestAssuredUtilityManager {
     /**
      * Method that returns session information (expiration time, token, token type, etc.)
      */
-    private Response generateToken(Credential userCredentials) {
+    private Response generateToken(Credentials userCredentials) {
         return given()
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/x-www-form-urlencoded")
@@ -54,7 +51,7 @@ public class RestAssuredUtilityManager {
     /**
      * Method that returns Bearer token
      */
-    public String getBearerToken(Credential userCredentials) {
+    public String getBearerToken(Credentials userCredentials) {
         return generateToken(userCredentials).path("access_token");
     }
 

@@ -2,10 +2,10 @@ package com.monportailrh.myModuleTest;
 
 import com.monportailrh.core.BaseTest;
 import com.monportailrh.core.TestListener;
-import com.monportailrh.utility.AllureLogger;
-import com.monportailrh.utility.model.Credential;
-import com.monportailrh.utility.model.MyModuleWidget;
-import com.monportailrh.utility.model.User;
+import com.monportailrh.utilities.AllureLogger;
+import com.monportailrh.utilities.models.Credentials;
+import com.monportailrh.utilities.models.MyModuleWidget;
+import com.monportailrh.utilities.models.User;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.monportailrh.utility.GeneralPropertyManger.BASE_URL;
+import static com.monportailrh.utilities.GeneralPropertyManger.BASE_URL;
 
 @Listeners({TestListener.class})
 @Severity(SeverityLevel.CRITICAL)
@@ -27,17 +27,17 @@ public class MyModuleWidgetTest extends BaseTest {
     @DataProvider(name = "nonAdminTestUsers")
     public Iterator<Object[]> nonAdminTestUsers() {
         List<Object[]> usersList = new ArrayList<>();
-        usersList.add(new Object[]{new User(Credential.ANGELINA_JOLIE)});
-        usersList.add(new Object[]{new User(Credential.BRAD_PITT)});
-        usersList.add(new Object[]{new User(Credential.DOLPH_LUNDGREN)});
-        usersList.add(new Object[]{new User(Credential.JESSICA_ALBA)});
+        usersList.add(new Object[]{new User(Credentials.ANGELINA_JOLIE)});
+        usersList.add(new Object[]{new User(Credentials.BRAD_PITT)});
+        usersList.add(new Object[]{new User(Credentials.DOLPH_LUNDGREN)});
+        usersList.add(new Object[]{new User(Credentials.JESSICA_ALBA)});
         return usersList.iterator();
     }
 
     @DataProvider(name = "adminTestUsers")
     public Iterator<Object[]> adminTestUsers() {
         List<Object[]> usersList = new ArrayList<>();
-        usersList.add(new Object[]{new User(Credential.SUPERADMIN)});
+        usersList.add(new Object[]{new User(Credentials.SUPERADMIN)});
         return usersList.iterator();
     }
 

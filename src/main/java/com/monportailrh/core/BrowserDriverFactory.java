@@ -1,7 +1,7 @@
 package com.monportailrh.core;
 
-import com.monportailrh.utility.AllureLogger;
-import com.monportailrh.utility.GeneralPropertyManger;
+import com.monportailrh.utilities.AllureLogger;
+import com.monportailrh.utilities.GeneralPropertyManger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

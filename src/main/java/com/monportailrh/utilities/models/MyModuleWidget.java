@@ -1,7 +1,7 @@
-package com.monportailrh.utility.model;
+package com.monportailrh.utilities.models;
 
 import com.monportailrh.object.BasePageObject;
-import com.monportailrh.utility.AllureLogger;
+import com.monportailrh.utilities.AllureLogger;
 import lombok.Data;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;

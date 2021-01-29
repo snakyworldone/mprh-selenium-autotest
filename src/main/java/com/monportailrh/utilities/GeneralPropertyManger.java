@@ -1,4 +1,4 @@
-package com.monportailrh.utility;
+package com.monportailrh.utilities;
 
 import java.io.FileInputStream;
 import java.io.IOException;
