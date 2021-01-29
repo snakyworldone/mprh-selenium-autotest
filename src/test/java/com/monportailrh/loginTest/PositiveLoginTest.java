@@ -33,7 +33,7 @@ public class PositiveLoginTest extends BaseTest {
         return usersList.iterator();
     }
 
-    @Test(dataProvider = "defaultUsers")
+    @Test(dataProvider = "defaultUsers", groups = {"smokes"})
     @Description("Login with valid credentials")
     public void logInTest(User testUser) {
         AllureLogger.logToAllure("Starting positive login test");

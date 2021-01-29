@@ -24,14 +24,14 @@ public class Header extends BasePageObject {
         super(driver);
     }
 
-    private boolean isLogoVisible() {
-        waitForVisibilityOf(headerLogo, 5);
-        return headerLogo.isDisplayed();
-    }
-
     @Step("Validating whether User logged in or not")
     public void validateLogin() {
         Assert.assertTrue(isLogoVisible());
         AllureLogger.logToAllure("User was successfully logged in");
+    }
+
+    private boolean isLogoVisible() {
+        waitForVisibilityOf(headerLogo, 5);
+        return headerLogo.isDisplayed();
     }
 }

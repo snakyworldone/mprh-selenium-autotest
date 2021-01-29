@@ -4,6 +4,7 @@ import com.monportailrh.utilities.AllureLogger;
 import com.monportailrh.utilities.models.User;
 import io.qameta.allure.Step;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class MyModuleWidget extends BasePageObject {
     private String mainWindowHandle;
     private static final int MODULES_BEFORE_ICON = 6;
@@ -30,44 +32,6 @@ public class MyModuleWidget extends BasePageObject {
     public MyModuleWidget(WebDriver driver) {
         super(driver);
 
-    }
-
-    private void clickOnExtendArrow() {
-        click(extendArrow);
-    }
-
-    private void validateActualAndExpectedModuleLinks(User testUser) {
-        String moduleName;
-        String actualUrl;
-        String expectedUrl;
-
-        for (WebElement element : getListOfModules()) {
-            moduleName = getInnerText(element);
-            expectedUrl = testUser.getMapOfModules().get(moduleName).getWebUrl();
-
-            AllureLogger.logToAllure("Clicking on [" + moduleName + "] module");
-            element.click();
-            switchToNewTab(mainWindowHandle);
-            actualUrl = getCurrentUrl();
-
-            Assert.assertEquals(actualUrl, expectedUrl);
-            AllureLogger.logToAllure("Actual URL equals to Expected");
-
-            closeCurrentTab();
-            switchToMainTab(mainWindowHandle);
-        }
-    }
-
-    private boolean validateMyModulesWidget() {
-        try {
-            waitForVisibilityOf(getTitle(), 5);
-        } catch (TimeoutException ignored) {
-        }
-        try {
-            return getTitle().isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 
     @Step("Check widget visibility")
@@ -113,4 +77,41 @@ public class MyModuleWidget extends BasePageObject {
         AllureLogger.logToAllure("All modules were successfully verified");
     }
 
+    private void clickOnExtendArrow() {
+        click(extendArrow);
+    }
+
+    private void validateActualAndExpectedModuleLinks(User testUser) {
+        String moduleName;
+        String actualUrl;
+        String expectedUrl;
+
+        for (WebElement element : getListOfModules()) {
+            moduleName = getInnerText(element);
+            expectedUrl = testUser.getMapOfModules().get(moduleName).getWebUrl();
+
+            AllureLogger.logToAllure("Clicking on [" + moduleName + "] module");
+            element.click();
+            switchToNewTab(mainWindowHandle);
+            actualUrl = getCurrentUrl();
+
+            Assert.assertEquals(actualUrl, expectedUrl);
+            AllureLogger.logToAllure("Actual URL equals to Expected");
+
+            closeCurrentTab();
+            switchToMainTab(mainWindowHandle);
+        }
+    }
+
+    private boolean validateMyModulesWidget() {
+        try {
+            waitForVisibilityOf(getTitle(), 5);
+        } catch (TimeoutException ignored) {
+        }
+        try {
+            return getTitle().isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 }

@@ -41,7 +41,7 @@ public class MyModuleWidgetTest extends BaseTest {
         return usersList.iterator();
     }
 
-    @Test(dataProvider = "adminTestUsers")
+    @Test(dataProvider = "adminTestUsers", groups = {"smokes"})
     @Description("Check whether Admin is able to view My Modules widget or not")
     public void checkVisibilityOfMyModulesWidgetForAdmin(User testUser) {
         AllureLogger.logToAllure("Starting Test to check MyModules widget visibility");
@@ -52,7 +52,7 @@ public class MyModuleWidgetTest extends BaseTest {
                 .validateMyModulesWidgetIsNotVisible();
     }
 
-    @Test(dataProvider = "nonAdminTestUsers")
+    @Test(dataProvider = "nonAdminTestUsers", groups = {"smokes"})
     @Description("Check whether non-Admin is able to view My Modules widget or not")
     public void checkVisibilityOfMyModulesWidgetForNonAdmin(User testUser) {
         AllureLogger.logToAllure("Starting Test to check MyModules widget visibility");
@@ -63,8 +63,8 @@ public class MyModuleWidgetTest extends BaseTest {
                 .validateMyModulesWidgetIsVisible();
     }
 
-    @Test(dataProvider = "nonAdminTestUsers")
-    @Description("This test checks displayed modules and compares to array of modules returned by api")
+    @Test(dataProvider = "nonAdminTestUsers", groups = {"smokes"})
+    @Description("Check displayed modules and compares to array of modules returned by api")
     public void checkDisplayedModules(User testUser) {
         AllureLogger.logToAllure("Starting Test to check Displayed modules");
 
@@ -81,8 +81,8 @@ public class MyModuleWidgetTest extends BaseTest {
                 .validateActualAndExpectedModuleArraysAreEqual(expectedArrayOfModules, actualArrayOfModules);
     }
 
-    @Test(dataProvider = "nonAdminTestUsers")
-    @Description("This test checks redirection links for all displayed modules and compares to redirection links returned by api ")
+    @Test(dataProvider = "nonAdminTestUsers", groups = {"smokes"})
+    @Description("Check redirection links for all displayed modules and compares to redirection links returned by api ")
     public void checkModuleRedirection(User testUser) {
         AllureLogger.logToAllure("Starting Test to check module redirection");
 
