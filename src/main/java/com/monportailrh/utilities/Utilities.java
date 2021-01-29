@@ -56,7 +56,7 @@ public class Utilities extends BaseTest {
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshot(WebDriver webDriver) {
+    public byte[] attachScreenshotToAllureReport(WebDriver webDriver) {
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
     }
 

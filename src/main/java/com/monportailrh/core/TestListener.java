@@ -3,7 +3,6 @@ package com.monportailrh.core;
 
 import com.monportailrh.utilities.AllureLogger;
 import com.monportailrh.utilities.Utilities;
-import io.qameta.allure.Attachment;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -22,19 +21,17 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         AllureLogger.logToAllure("Test [" + testMethodName + "] passed");
-        AllureLogger.logToAllure("");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         Utilities utilities = new Utilities();
         WebDriver driver = (WebDriver) result.getTestContext().getAttribute("webDriver");
-        utilities.saveScreenshot(driver);
+        utilities.attachScreenshotToAllureReport(driver);
 
         AllureLogger.logToAllure("Test [" + testMethodName + "] failed");
         AllureLogger.logToAllure("Screenshot captured");
         AllureLogger.logToAllure("ASSERTION ERROR: " + result.getThrowable());
-        AllureLogger.logToAllure("");
     }
 
     @Override
@@ -56,6 +53,5 @@ public class TestListener implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         AllureLogger.logToAllure("ALL [" + testName + "] FINISHED");
-        AllureLogger.logToAllure("");
     }
 }

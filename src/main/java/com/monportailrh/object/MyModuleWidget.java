@@ -1,7 +1,8 @@
-package com.monportailrh.utilities.models;
+package com.monportailrh.object;
 
-import com.monportailrh.object.BasePageObject;
 import com.monportailrh.utilities.AllureLogger;
+import com.monportailrh.utilities.models.User;
+import io.qameta.allure.Step;
 import lombok.Data;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -69,18 +70,21 @@ public class MyModuleWidget extends BasePageObject {
         }
     }
 
+    @Step("Check widget visibility")
     public MyModuleWidget validateMyModulesWidgetIsVisible() {
         Assert.assertTrue(validateMyModulesWidget());
         AllureLogger.logToAllure("[My Modules] widget is visible");
         return this;
     }
 
+    @Step("Check widget visibility")
     public MyModuleWidget validateMyModulesWidgetIsNotVisible() {
         Assert.assertFalse(validateMyModulesWidget());
         AllureLogger.logToAllure("[My Modules] widget is not visible");
         return this;
     }
 
+    @Step("Compare actual and expected arrays")
     public MyModuleWidget validateActualAndExpectedModuleArraysAreEqual(List<String> expectedArrayOfModules, List<String> actualArrayOfModules) {
         Assert.assertEquals(actualArrayOfModules, expectedArrayOfModules);
         AllureLogger.logToAllure("Arrays are equal");
@@ -99,14 +103,14 @@ public class MyModuleWidget extends BasePageObject {
         return testUser.getListWithAllModuleNames();
     }
 
-    public MyModuleWidget validateModuleRedirection(User testUser) {
+    @Step("Validate each module's redirection")
+    public void validateModuleRedirection(User testUser) {
         mainWindowHandle = driver.getWindowHandle();
         if (listOfModules.size() > MODULES_BEFORE_ICON) {
             clickOnExtendArrow();
         }
         validateActualAndExpectedModuleLinks(testUser);
         AllureLogger.logToAllure("All modules were successfully verified");
-        return this;
     }
 
 }

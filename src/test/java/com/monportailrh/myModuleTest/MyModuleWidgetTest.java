@@ -4,7 +4,7 @@ import com.monportailrh.core.BaseTest;
 import com.monportailrh.core.TestListener;
 import com.monportailrh.utilities.AllureLogger;
 import com.monportailrh.utilities.models.Credentials;
-import com.monportailrh.utilities.models.MyModuleWidget;
+import com.monportailrh.object.MyModuleWidget;
 import com.monportailrh.utilities.models.User;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
@@ -42,24 +42,24 @@ public class MyModuleWidgetTest extends BaseTest {
     }
 
     @Test(dataProvider = "adminTestUsers")
-    @Description("This test checks whether Admin is able to view My Modules widget or not")
+    @Description("Check whether Admin is able to view My Modules widget or not")
     public void checkVisibilityOfMyModulesWidgetForAdmin(User testUser) {
         AllureLogger.logToAllure("Starting Test to check MyModules widget visibility");
 
         myModuleWidget = baseRouter
                 .openLoginPage(BASE_URL)
-                .validateLogin(testUser, new MyModuleWidget(driver))
+                .completeLoginFormAndProceed(testUser, new MyModuleWidget(driver))
                 .validateMyModulesWidgetIsNotVisible();
     }
 
     @Test(dataProvider = "nonAdminTestUsers")
-    @Description("This test checks whether non-Admin is able to view My Modules widget or not")
+    @Description("Check whether non-Admin is able to view My Modules widget or not")
     public void checkVisibilityOfMyModulesWidgetForNonAdmin(User testUser) {
         AllureLogger.logToAllure("Starting Test to check MyModules widget visibility");
 
         myModuleWidget = baseRouter
                 .openLoginPage(BASE_URL)
-                .validateLogin(testUser, new MyModuleWidget(driver))
+                .completeLoginFormAndProceed(testUser, new MyModuleWidget(driver))
                 .validateMyModulesWidgetIsVisible();
     }
 
@@ -70,7 +70,7 @@ public class MyModuleWidgetTest extends BaseTest {
 
         myModuleWidget = baseRouter
                 .openLoginPage(BASE_URL)
-                .validateLogin(testUser, new MyModuleWidget(driver))
+                .completeLoginFormAndProceed(testUser, new MyModuleWidget(driver))
                 .validateMyModulesWidgetIsVisible();
 
 
@@ -88,7 +88,7 @@ public class MyModuleWidgetTest extends BaseTest {
 
         myModuleWidget = baseRouter
                 .openLoginPage(BASE_URL)
-                .validateLogin(testUser, new MyModuleWidget(driver))
+                .completeLoginFormAndProceed(testUser, new MyModuleWidget(driver))
                 .validateMyModulesWidgetIsVisible();
 
         List<String> expectedArrayOfModules = testUser.getListWithAllModuleNames();
