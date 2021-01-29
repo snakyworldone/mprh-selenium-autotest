@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: circleci/openjdk:stretch
       - image: selenium/standalone-chrome:latest
+      - image: frankescobar/allure-docker-service
     parameters:
       target_env:
         type: enum
