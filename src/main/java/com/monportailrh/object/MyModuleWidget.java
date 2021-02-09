@@ -23,6 +23,7 @@ public class MyModuleWidget extends BasePageObject {
     private static final int MODULES_BEFORE_ICON = 6;
     @FindBy(xpath = "//h4[contains(text(), 'My Modules')]")
     private WebElement title;
+    //improve to xpath
     @FindAll({@FindBy(css = "div.px-2")})
     private List<WebElement> listOfModules;
     //not unique xpath
