@@ -22,7 +22,7 @@ import static com.monportailrh.utilities.GeneralPropertyManger.BASE_URL;
 @Listeners({TestListener.class})
 @Severity(SeverityLevel.CRITICAL)
 public class PositiveLoginTest extends BaseTest {
-    @DataProvider(name = "defaultUsers")
+    @DataProvider(name = "defaultUsers", parallel = true)
     public Iterator<Object[]> createData() {
         List<Object[]> usersList = new ArrayList<>();
         usersList.add(new Object[]{new User(Credentials.SUPERADMIN)});

@@ -9,5 +9,6 @@
 3. cd application
 4. Credentials to >  http://testmprh:4444/wd/hub
 4.1 (optional) to run locally: http://localhost:4444/wd/hub
-5. mvn test (or -Dsurefire.suiteXmlFiles=src/test/resources/TestSuites/LoginTestSuites/PositiveLoginTestSuites.xml)
+5. mvn test (or -Dsurefire.suiteXmlFiles=src/test/resources/TestSuites/LoginTestSuites/PositiveLoginTestSuites.xml) or  mvn test -Dgroups=login
+
 

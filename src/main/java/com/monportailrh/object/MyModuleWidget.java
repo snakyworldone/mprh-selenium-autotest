@@ -19,12 +19,12 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MyModuleWidget extends BasePageObject {
+
     private String mainWindowHandle;
     private static final int MODULES_BEFORE_ICON = 6;
     @FindBy(xpath = "//h4[contains(text(), 'My Modules')]")
     private WebElement title;
-    //improve to xpath
-    @FindAll({@FindBy(css = "div.px-2")})
+    @FindAll({@FindBy(xpath = "//div[contains(@class, 'px-2')]")})
     private List<WebElement> listOfModules;
     //not unique xpath
     @FindBy(xpath = "//div[contains(@class, 'mb137')]//div[contains(@class, 'icon-down-arrow')]")
@@ -56,16 +56,13 @@ public class MyModuleWidget extends BasePageObject {
         return this;
     }
 
+    // move to utills
     public List<String> getActualArrayOfModules() {
         List<String> myModules = new ArrayList<>();
         for (WebElement element : getListOfModules()) {
             myModules.add(getInnerText(element));
         }
         return myModules;
-    }
-
-    public List<String> getExpectedArrayOfModules(User testUser) {
-        return testUser.getListWithAllModuleNames();
     }
 
     @Step("Validate each module's redirection")

@@ -8,17 +8,19 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public class Header extends BasePageObject {
+
     @FindBy(xpath = "//img[@class=\"peoplespere-logo\"]")
     private WebElement headerLogo;
     @FindBy(id = "search-input")
     private WebElement headerSearchBar;
     @FindBy(xpath = "//button[contains(@title, 'Self Service')]")
-    private WebElement headerPlusButton;
-    // try to use //div[contains(@class, 'selfservice-container')]//li/a[contains(text(), 'HR Request')]
+    private WebElement headerSelfServiceButton;
     @FindBy(xpath = "//a[contains(text(), 'HR Request')]")
     private WebElement headerPlusButtonHrRequests;
     @FindBy(id = "PopoverMyTeam")
     private WebElement headerMyTeam;
+    @FindBy(xpath = "//a[contains(@translation-id, 'web.containers.App.profileTooltip')]")
+    private WebElement profileButton;
 
     public Header(WebDriver driver) {
         super(driver);
