@@ -33,20 +33,6 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <useSystemClassLoader>false</useSystemClassLoader>
-                    <properties>
-                        <property>
-                            <name>parallel</name>
-                            <value>methods</value>
-                        </property>
-                        <property>
-                            <name>threadCount</name>
-                            <value>2</value>
-                        </property>
-                        <property>
-                            <name>dataproviderthreadcount</name>
-                            <value>2</value>
-                        </property>
-                    </properties>
                 </configuration>
 
                 <dependencies>
@@ -57,30 +43,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
-            <!--remove?-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <configuration>
-                    <transformers>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>org.testng.TestNG</mainClass>
-                        </transformer>
-                    </transformers>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
