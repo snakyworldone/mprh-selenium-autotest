@@ -19,7 +19,7 @@ jobs:
       - run: mkdir -p config
       - run: echo $config_<< parameters.target_env >> | base64 --decode > config/qa.properties
       - run: docker network create grid
-      - run: docker docker run --net testmprh --name testmprh -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
+      - run: docker  run --net testmprh --name testmprh -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
       - run: docker ps -a
       - run: docker network ls
       - run: mvn test
